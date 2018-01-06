@@ -2,16 +2,17 @@ import axios from "axios";
 
 export default {
   getScores: function() {
-    return axios.get("/api/scores");
+    return axios.get("/api/score");
   },
-  getScore: function(id) {
-    return axios.get("/api/scores/"+id);
+  getStudent: function(id) {
+    console.log("before axios call",id);
+    return axios.get("/api/students/"+id);
   },
-  deleteScore : function(id) {
-    return axios.delete("/api/scores/"+id);
-  }
+  deleteStudent : function(id) {
+    return axios.delete("/api/students/"+id);
+  },
   saveScore: function(scoredata) {
-    return axios.post("/api/scores",scoredata);
+    return axios.post("/api/score",scoredata);
   }
 
 }

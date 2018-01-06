@@ -1,3 +1,4 @@
 module.exports = {
-  Book: require("./score")
+  StudentDetails: require("./Students"),
+  BatchDetails: require("./BatchDetails")
 };
