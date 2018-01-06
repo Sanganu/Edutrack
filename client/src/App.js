@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch ,Redirect} from "react-router-dom";
 import Main from "./pages/Main"; //Both teacher and student login
 import Teachermain from "./pages/Teachermain" ; // teacher main page
 import Createbatch from "./pages/Createbatch";

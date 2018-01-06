@@ -14,7 +14,8 @@ class Createbatch extends Component {
     handleInputChange = (event) => {
       const target = event.target;
       const value = target.type === 'checkbox' ? target.name : target.value;
-      const name = target.type === 'checkbox' ? 'daysofweek' : target.name;
+      const name
+       = target.type === 'checkbox' ? 'daysofweek' : target.name;
       console.log('The Value in input change',value,name);
 
       this.setState({
@@ -26,7 +27,7 @@ class Createbatch extends Component {
     };
     handleClassCreation = () => {
        console.log("In Class Creation");
-       let classid = 0 ///logic need to be written
+       let classid = 0 ///logic need to be written(3 digit day 3 digit level incorporate timings)
 
        axios.post('/api/batch/new',
                   {

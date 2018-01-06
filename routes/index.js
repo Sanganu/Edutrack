@@ -1,10 +1,7 @@
 const path = require("path");
 const router = require("express").Router();
 const db = require('../models')
-//const apiRoutes = require("./api");
 
-//router.use("/api", apiRoutes);
-//Trial of student login
 router.get('/api/students/login',function(req,res) {
    console.log("Inside router",req.body);
    db.Students
