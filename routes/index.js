@@ -17,14 +17,17 @@ router.get('/api/students/login',function(req,res) {
 
 //Create new batch
 router.post('/api/batch/new',function(req,res) {
-  console.log("Inside router to add new batch",req.body);
-  db.BatchDetails
+  var newrecord = req.body;
+   console.log("Inside router to add new batch",req.body);
+
+  db.batchdetails
      .create(newrecord)
-     .then(function(dbclassdetails){
-        console.log("Inserted record");
-        res.json(dbclassdetails);
+     .then(function(dbdetails){
+        console.log("Inserted record details",dbdetails);
+         res.json(dbdetails);
      })
      .catch(function(err){
+       console.log("Error",err)
        res.json(err);
      });
 });
@@ -32,13 +35,15 @@ router.post('/api/batch/new',function(req,res) {
 ////Add New student
 router.post('/api/batch/student/new',function(req,res) {
   console.log("Inside router to add new batch",req.body);
-  db.StudentDetails
+  var newrecord = req.body;
+  db.studentdetails
      .create(newrecord)
-     .then(function(dbclassdetails){
-        console.log("Inserted record");
-        res.json(dbclassdetails);
+     .then(function(dbstudentdetails){
+        console.log("Inserted record",dbstudentdetails);
+        res.json(dbstudentdetails);
      })
      .catch(function(err){
+       console.log("The Error",err)
        res.json(err);
      });
 });

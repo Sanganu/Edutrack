@@ -1,4 +1,4 @@
 module.exports = {
-  StudentDetails: require("./Students"),
-  BatchDetails: require("./BatchDetails")
+  studentdetails: require("./Students"),
+  batchdetails: require("./BatchDetails")
 };

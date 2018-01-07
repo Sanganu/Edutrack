@@ -24,8 +24,9 @@ class Main extends Component
              } */);
           }
 
-          handleteacherlogin = (id) => {
-            console.log("In the click - before API call",id);
+          handleteacherlogin = (event) => {
+            event.preventDefault();
+            console.log("In the click - before API call");
             window.location = '/teacher/createbatch/' ;
             /*
             axios.get('/api/teachers/login',
@@ -41,7 +42,7 @@ class Main extends Component
                  .catch(err => console.log(err));*/
           };
 
-          handlestudentLogin = (id) => {
+           handlestudentLogin = (id) => {
             console.log("In the click - before API call",id)
             axios.get('/api/student/login',
                 {

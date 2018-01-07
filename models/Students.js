@@ -13,7 +13,11 @@ const studentSchema = new Schema({
           },
       studentlname: {
           type: String,
-          require: true,
+          required: true,
+        },
+        studentemain: {
+          type:String,
+          required: true,
         },
         parenttname: {
           type: String,
@@ -21,7 +25,7 @@ const studentSchema = new Schema({
         },
         parentemail: {
           type: String,
-          requied: true
+          requied: true,
         },
         parentphonenumber: {
           type:String,
@@ -33,5 +37,5 @@ const studentSchema = new Schema({
         }
 
 });
-const StudentDetails = mongoose.model("Students", studentSchema);
-module.exports = StudentDetails;
+const studentdetails = mongoose.model("studentdetails", studentSchema);
+module.exports = studentdetails;

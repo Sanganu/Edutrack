@@ -1,3 +1,4 @@
+
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -7,37 +8,35 @@ const batchdetailsSchema = new Schema({
            requires: true,
            unique: true,
         },
-        classtdetails: {
+        classdetails: {
            type: String,
            required: true
-
          },
-        timings: {
-           type: Number,
-           required: true
+        starttimings: {
+           type: String,
+           required: true,
+          },
+          endtimings: {
+            type:String,
+            required: true,
           },
         level: {
           type: String,
-          require: true,
+
         },
         rate: {
           type: Number,
-          required: true,
+
         },
        createdDate: {
           type:Date,
           default: Date.now
         },
-        daysoftheweek: [
-          {
-            subject: String,
-            date: {
-              type: Date,
-              default: Date.now
-            } ,
-            timetaken: String
+        dayofweek:{
+          type: String,
           },
-        ]
 });
-const BatchDetails = mongoose.model("BatchDetails", batchdetailsSchema);
-module.exports = BatchDetails;
+
+
+const batchdetails = mongoose.model("batchdetails", batchdetailsSchema);
+module.exports = batchdetails;
