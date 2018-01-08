@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Jumbotron from "./../components/Jumbotron";
 
 //Need to api call for Google calendar
 

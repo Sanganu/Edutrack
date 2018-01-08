@@ -20,13 +20,13 @@ mongoose.Promise = global.Promise;
 let yesdb = false;
 let yesapp = false;
 
-if(process.env.MONGODB_URI) {
+if (process.env.MONGODB_URI) {
       mongoose.connect(process.env.MONGODB_URI);
       console.log("mongoose connected");
 
 }
 else {
-      mongoose.connect("mongodb://localhost/gikshasolution1");
+      mongoose.connect("mongodb://localhost/edutrack");
          console.log(" Server - mongoose connected");
 }
 

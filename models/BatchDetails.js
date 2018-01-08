@@ -3,14 +3,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const batchdetailsSchema = new Schema({
-        classid : {
-           type:String,
-           requires: true,
-           unique: true,
-        },
         classdetails: {
            type: String,
-           required: true
+           required: true,
+           unique: true,
          },
         starttimings: {
            type: String,
@@ -26,7 +22,6 @@ const batchdetailsSchema = new Schema({
         },
         rate: {
           type: Number,
-
         },
        createdDate: {
           type:Date,
@@ -35,6 +30,10 @@ const batchdetailsSchema = new Schema({
         dayofweek:{
           type: String,
           },
+        students: [{
+          type: Schema.Types.ObjectId,
+          ref: 'studentdetails'
+        }]
 });
 
 

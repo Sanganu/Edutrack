@@ -178,10 +178,8 @@ class MainSection extends Component {
          const multiplication = this.state.multiplication;
          const division = this.state.division;
          const tquest = this.state.tquest;
-         const anslet = this.state.anslet;
          const question = this.state.question;
          const answer = this.state.answer;
-         const score = this.state.score;
          const qno = this.state.qno;
          const upto = this.state.upto;
 

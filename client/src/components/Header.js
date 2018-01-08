@@ -5,8 +5,9 @@ class Header extends Component {
   {
     return(
         <div className = "jumbotron">
-         <h1>Easy Homework management Solution</h1>
+         <h1>Giksha solutions</h1>
         </div>
-    )
+    );
   }
 }
+export default Header;

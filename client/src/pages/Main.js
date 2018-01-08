@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-//import Header from "../../components/Header";
+//import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from 'axios';
 
 class Main extends Component
@@ -44,7 +43,7 @@ class Main extends Component
 
            handlestudentLogin = (id) => {
             console.log("In the click - before API call",id)
-            axios.get('/api/student/login',
+            axios.post('/api/student/login',
                 {
                   stdid:this.state.studentname,
                   stdpwd:this.state.studentpassword

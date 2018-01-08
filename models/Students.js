@@ -15,17 +15,13 @@ const studentSchema = new Schema({
           type: String,
           required: true,
         },
-        studentemain: {
+        loginemail: {
           type:String,
           required: true,
         },
-        parenttname: {
+        parentname: {
           type: String,
           required: true,
-        },
-        parentemail: {
-          type: String,
-          requied: true,
         },
         parentphonenumber: {
           type:String,
@@ -34,7 +30,11 @@ const studentSchema = new Schema({
       addedon : {
         type: Date,
         default: Date.now
-        }
+      },
+      batchid : {
+        type: Schema.Types.ObjectId,
+        ref: 'batchdetails'
+      }
 
 });
 const studentdetails = mongoose.model("studentdetails", studentSchema);
