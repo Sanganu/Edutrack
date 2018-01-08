@@ -35,7 +35,7 @@ router.post('/api/teacher/batch/new',function(req,res) {
                                errid: vrmsg,
                                errstring: "Batch details already exist -- Please delete old batch and register again if this is a new batch",
                                err : err
-                           });
+                              });
                          }
                       else
                       {

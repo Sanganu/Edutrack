@@ -47,12 +47,14 @@ class Createbatch extends Component {
                       console.log("The response from adding class",response);
                       console.log("The inserted record ID",response.data._id);
                       this.setState({batchdet : response.data});
-                      window.location = '/teacher/batch/addstudent/'+response._id;
-                    })
+                      this.props.onInsert(response.data)
+                      //window.location = '/teacher/batch/addstudent/'+response._id;
+                    });
+                    /*
                     .catch(error => {
                         this.setState({errmsg: error.errstring +" Please check console for further details"});
                         console.log("Error in Adding Batch",error.err);
-                    }); //end new batch creation - axios call
+                    }); //end new batch creation - axios call */
 
         }; // end handleclasscreation
 

@@ -42,7 +42,8 @@ class Addstudent extends Component {
                   .then(res =>
                     {
                       console.log("The response from adding student",res);
-                      window.location.reload();
+                      this.props.onchange(res)
+                      //window.location.reload();
                     })
                     .catch(error => console.log("Error!!!!",error)
                   );
@@ -59,11 +60,14 @@ class Addstudent extends Component {
       }
 */
       render() {
+        const batchdet = this.props.batchdet;
         return(
           <div>
               <h1>Display Batch Details</h1>
               <h4>Batch details</h4>
-
+                <h6>{this.batchdet.classdetails}</h6>
+                <p>{this.batchdet.starttimings}-{this.batchdet.endtimings}</p>
+                <p>{this.batchdet.level} {this.batchdet.rate} {this.batchdet.dayofweek}</p>
                 <h4>Add Students to the Batch</h4>
                 <form>
                     <label className ="inline">

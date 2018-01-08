@@ -26,7 +26,7 @@ class Main extends Component
           handleteacherlogin = (event) => {
             event.preventDefault();
             console.log("In the click - before API call");
-            window.location = '/teacher/createbatch/' ;
+            window.location = '/teacher/myaccount/' ;
             /*
             axios.get('/api/teachers/login',
                 {
