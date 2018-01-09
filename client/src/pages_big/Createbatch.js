@@ -48,8 +48,7 @@ class Createbatch extends Component {
                       console.log("The inserted record ID",response.data._id);
                       this.setState({batchdet : response.data});
                       this.props.onInsert(response.data)
-                      //window.location = '/teacher/batch/addstudent/'+response._id;
-                      //return <Addstudent />
+                      window.location = '/teacher/batch/addstudent/'+response._id;
                     });
                     .catch(error => {
                         this.setState({errmsg: error.errstring +" Please check console for further details"});

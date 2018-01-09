@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Createbatch from './Createbatch';
 import Addstudent from './Addstudent';
+import Allstudents from './displayallstudents';
+
 //Need to api call for Google calendar
 
 class Teachermain extends Component {
@@ -36,9 +38,7 @@ class Teachermain extends Component {
             });
       };
 
-      render() {() => {
-        console.log('Setstate callback',this.state.studentdet);
-      }
+      render() {
         const displaybatch = this.state.displaybatch;
         const batchdet = this.state.batchdet;
 
@@ -50,12 +50,14 @@ class Teachermain extends Component {
                                                        onInsert={this.handleBatchCreated} />
                                        : <Addstudent batchdet = {batchdet}
                                                      onchange = {this.handleStudentAdded} />}
-
+                <table>
+                <Allstudents studentrec = {this.state.studentdet}
+                </table>
 
            </div>
-        )
-      }
+        ) // end return
+      }// end render
 
-}
+} // end class Batchmain
 
-export default Teachermain;
+export default Batchmain;
