@@ -1,59 +1,44 @@
 import React, { Component } from 'react';
 import Createbatch from './Createbatch';
 import Addstudent from './Addstudent';
-import Allstudents from './displayallstudents';
+//import Allstudents from './displayallstudents';
+//import Allbatches from './displayallbatchdetails';
+import axios from 'axios';
 
 //Need to api call for Google calendar
 
-class Teachermain extends Component {
+class Batchmain extends Component {
       constructor(props) {
           super(props);
           this.state = {
-            displaybatch : "true",
-            batchdet : "",
-            studentdet : []
+          batchid : ''
           }
       };
 
-      handleStudentAdded = (newstudent) => {
-        let studentdet = this.state.studentdet;
-        studentdet.push(newstudent);
-        this.setState({ studentdet },
-          () => {
-            console.log('Setstate callback',this.state.studentdet);
-          });
-      };
+
 
       handleBatchCreated = (newbatchdata) => {
         //event.preventDefault();
-        console.log("In parent compo - batch create method")
+        const batchid = newbatchdata;
+
+
+        console.log("In parent compo - batch create method");
+
         this.setState({
-            batchdet : newbatchdata },
+            batchid : batchid},
             () => {
               console.log('Setstate callback level1',this.state.batchdet);
-              this.setState({  displaybatch : false},
-                () => {
-                   console.log('Setstate callback level2',this.state.displaybatch);
-                 });
-            });
-      };
+            }); //end this state
+      }; // end handlebatchcreated
 
       render() {
-        const displaybatch = this.state.displaybatch;
-        const batchdet = this.state.batchdet;
+        //const batchdet = this.state.batchdet;
+        const  brecords = this.state.batchrecords;
 
         return(
            <div>
-               <h1> Teacher Page - Create new batch</h1>
-               {this.state.displaybatch ? <Createbatch displayme ={displaybatch}
-                                                       batchdet = {batchdet}
-                                                       onInsert={this.handleBatchCreated} />
-                                       : <Addstudent batchdet = {batchdet}
-                                                     onchange = {this.handleStudentAdded} />}
-                <table>
-                <Allstudents studentrec = {this.state.studentdet}
-                </table>
-
+               <h1> Teacher Page - Batch Details</h1>
+                <Createbatch    onInsert={this.handleBatchCreated} />
            </div>
         ) // end return
       }// end render

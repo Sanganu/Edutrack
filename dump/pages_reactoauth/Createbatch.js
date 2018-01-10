@@ -3,23 +3,21 @@ import axios from 'axios';
 //import Addstudent from "./Addstudent";
 
 class Createbatch extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-          batchid : "",
-          batchdesc:"",
-          subject: "Music",
-          level: "Beginner",
-          rateperhour: '30',
-          batchdet: '',
-          errmsg : '',
-            };
-    }
-
+    state = {
+      cldetails: "Music",
+      starttimings: "6:00",
+      endtimings: "7:00",
+      level: "Beginner",
+      rate: '30',
+      dayofweek: 'Monday',
+      batchdet: '',
+      errmsg : '',
+      displaystudent: 'true'
+        };
 
     handleInputChange = (event) => {
           const target = event.target;
-          const value = target.value;
+          const value = target.type === 'checkbox' ? target.name : target.value;
           const name  = target.name;
           console.log('The Value in input change',value,name);
 
@@ -34,21 +32,22 @@ class Createbatch extends Component {
     handleClassCreation = (event) => {
             event.preventDefault();
              console.log("In Class Creatio n state values",this.state);
-             var myDate = new Date(this.state.startdate);
+
              axios.post('/api/teacher/batch/new',
                       {
-                            batchid: this.state.batchid,
-                            subject: this.state.subject,
-                            batchdesc : this.state.batchdesc,
+                            classdetails : (this.state.cldetails)+(this.state.dayofweek)+(this.state.starttimings),
+                            starttimings : this.state.starttimings,
+                            endtimings: this.state.endtimings,
                             level : this.state.level,
-                            rateperhour : this.state.rateperhour
+                            rate : this.state.rate,
+                            dayofweek : this.state.dayofweek
                       })
                   .then(response =>
                     {
                       console.log("The response from adding class",response);
                       console.log("The inserted record ID",response.data._id);
                       this.setState({batchdet : response.data});
-                      this.props.onInsert(response.data._id)
+                      this.props.onInsert(response.data)
                       //window.location = '/teacher/batch/addstudent/'+response._id;
                       //return <Addstudent />
                     })
@@ -66,27 +65,34 @@ class Createbatch extends Component {
                        <h3 className = "subHeading">Create New Class</h3>
                        <h5>{this.state.errmsg}</h5>
                     <form>
-                        <label className ="inline">Batch ID (numbers only)
-                            <input type = "text"   value={this.state.batchid} onChange = {this.handleInputChange} name = "batchid" />
-                         </label>
-                         <label className ="inline">Batch Description
-                             <input type = "text"   value={this.state.batchdesc} onChange = {this.handleInputChange} name = "batchdesc" />
-                          </label>
-                         <select  value={this.state.subject} onChange = {this.handleInputChange} name ="subject" id="subject">
+                         <select  value={this.state.cldetails} onChange = {this.handleInputChange} name ="cldetails" id="cldetails">
                              <option value ='Music'>Music</option>
                              <option value ='Piano'>Piano</option>
                              <option value ='Tennis'>Tennis</option>
                              <option value ='Dance'>Dance</option>
                          </select>
-                         <label className ="inline">Rate per class per student($)
-                             <input type = "text"   value={this.state.rateperhour} onChange = {this.handleInputChange} name = "rateperhour" />
+                        <label className ="inline">Start Timings
+                            <input type = "text"   value={this.state.starttimings} onChange = {this.handleInputChange} name = "starttimings" />
                          </label>
-                           <select onChange = {this.handleInputChange} name ="level" id="level">
-                                 <option value ='Beginner'>Beginner</option>
-                                 <option value ='Intermediate'>Intermediate</option>
-                                 <option value ='Advance'>Advance</option>
-                             </select>
+                          <label className ="inline">End Timings
+                             <input type = "text"   value={this.state.endtimings} onChange = {this.handleInputChange} name = "endtimings" />
+                          </label>
+                         <label className ="inline">Level
+                             <input type = "text"   value={this.state.level} onChange = {this.handleInputChange} name = "Level" />
+                         </label>
+                         <label className ="inline">Rate
+                             <input type = "text"   value={this.state.rate} onChange = {this.handleInputChange} name = "rate" />
+                         </label>
 
+                         <select onChange = {this.handleInputChange} name ="dayofweek" id="dayofweek">
+                             <option value ='Sunday'>Sunday</option>
+                             <option value ='Monday'>Monday</option>
+                             <option value ='Tuesday'>Tuesday</option>
+                             <option value ='Wednesday'>Wednesday</option>
+                             <option value ='Thursday'>Thursday</option>
+                             <option value ='Friday'>Friday</option>
+                             <option value ='Saturday'>Saturday</option>
+                         </select>
                          <button className = "btn btn-info"  name = "clcreation" onClick = {this.handleClassCreation}>Create Batch</button>
                     </form>
 

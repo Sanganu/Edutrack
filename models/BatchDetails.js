@@ -3,36 +3,32 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const batchdetailsSchema = new Schema({
-        classdetails: {
+        batchid:{
+          type:Number,
+          unquie:true,
+          required:true
+        },
+        batchdesc: {
            type: String,
-           required: true,
-           unique: true,
          },
-        starttimings: {
+         subject: {
            type: String,
-           required: true,
-          },
-          endtimings: {
-            type:String,
-            required: true,
-          },
+
+         },
         level: {
           type: String,
 
         },
-        rate: {
+        rateperhour: {
           type: Number,
         },
        createdDate: {
           type:Date,
           default: Date.now
         },
-        dayofweek:{
-          type: String,
-          },
-        students: [{
+        classes: [{
           type: Schema.Types.ObjectId,
-          ref: 'studentdetails'
+          ref: 'classdetails'
         }]
 });
 

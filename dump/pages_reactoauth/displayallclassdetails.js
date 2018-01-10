@@ -3,7 +3,7 @@ import axios from 'axios';
 
 class Allclasses extends Component
 {
-  axios.get('/api/teachers/')
+  //axios.get('/api/teachers/')
 
     render()
     {
@@ -16,10 +16,9 @@ class Allclasses extends Component
                  <th>{classrecs.endtimings}</th>
                  <th>{classrecs.level}</th>
                  <th>{classrecs.dayofweek}</th>
-            <tr>
-          )}
-      </div>
-      );
+            </tr>))
+          }
+      </div>);
     }
 }
 

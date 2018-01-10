@@ -1,34 +1,38 @@
-import React, { Component } from 'react';
+import React, { Component, Link } from 'react';
 //import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ReactDOM from 'react-dom';
-import Allclasses from './displayallclassdetails';
+import Allbatches from './displayallbatchdetails';
+import Batchmain from './Batchmain';
+import Createbatch from './Createbatch';
 
-import axios from 'axios';
 
-
-class Main extends Component
+class Teachermain extends Component
 {
-          state = {
-            studentid : '',
-            studentpassword: '',
-            teacherid : '',
-            teacherpassword: ''
-          };
+         constructor(props)
+         {
+           super(props);
+           this.state = {
+             studentid : '',
+             studentpassword: '',
+             teacherid : '',
+             teacherpassword: ''
+           };
+         }
 
-  render()
-  {
-    return(<div>
-                 <Link to ="/teacher/createbatch">Create Batch</Link>
-                 <Link to = "">Search </link>
-                 <Link to ="">Search Students</link>
-                 <Allclasses />
-          </div>
-    )
-  }
 
-}
+          render()
+          {
+                  return(<div>
+                                <Batchmain />
 
-export default Main;
+                                <Allbatches />
+                        </div>
+                  ) ; //end return
+          } //end render
+
+} //end class Teacher Main
+
+export default Teachermain;
 
 /*
 <label className ="inline">
@@ -63,4 +67,18 @@ export default Main;
        </label>
        <button className="btn btn-info" name="stlogin"  onClick = {this.handlestudentLogin}>Login</button>
 
-*/
+
+
+          nextcomp = (event) =>
+          {
+                const itlink = event.target.name;
+                if ( itlink === "batchmain")
+                {
+                  console.log("batchmain");
+                    return <Batchmain />
+                }
+                else if( itlink === "search")
+                {
+                  console.log("search")
+                }
+          } */

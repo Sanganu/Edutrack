@@ -2,23 +2,10 @@ const path = require("path");
 const router = require("express").Router();
 const db = require('../models')
 
-router.get('/api/students/login',function(req,res) {
-   console.log("Inside router",req.body);
-   db.Students
-     .findOne({_id: req.body.stdid})
-     .then(function(studentdet){
-       res.json(studentdet);
-     })
-     .catch(function(err){
-       res.json(err);
-     });
-
-});
-
 //Create new batch
 router.post('/api/teacher/batch/new',function(req,res) {
       var newrecord = req.body;
-       console.log("Inside router to add new batch",req.body);
+       console.log("Insiderouter to add new batch",req.body);
 
       db.batchdetails
              .create(newrecord)
@@ -27,25 +14,29 @@ router.post('/api/teacher/batch/new',function(req,res) {
                  res.json(dbdetails);
              })
              .catch(function(err){
-                   var vrmsg  = (err.errmsg).substr(0,6);
-                      if( vrmsg === 'E11000')
-                         {
-                           console.log("Batch details already exist -- Please delete batch and register again if this is a new batch");
-                           res.json({
-                               errid: vrmsg,
-                               errstring: "Batch details already exist -- Please delete old batch and register again if this is a new batch",
-                               err : err
+                  if(err)
+                  {
+                     var vrmsg  = (err.errmsg).substr(0,6);
+                        if( vrmsg === 'E11000')
+                           {
+                             console.log("Batch details already exist -- Please delete batch and register again if this is a new batch");
+                             res.json({
+                                 errid: vrmsg,
+                                 errstring: "Batch details already exist -- Please delete old batch and register again if this is a new batch",
+                                 err : err
+                                });
+                           }
+                         else
+                        {
+                            console.log("Error on saving batch details",err);
+                            res.json({
+                              errid: 'OTHERS',
+                              errstring: "OTHERS -Error in saving Batch details",
+                              err : err
                               });
-                         }
-                      else
-                      {
-                          console.log("Error on saving batch details",err);
-                          res.json({
-                            errid: 'OTHERS',
-                            errstring: "OTHERS -Error in saving Batch details",
-                            err : err
-                            });
-                      }
+                        }
+                        console.log(err);
+                    }    
 
              }); //end catch section
 }); // end db.batchdetails
@@ -53,7 +44,7 @@ router.post('/api/teacher/batch/new',function(req,res) {
 
 ////Add New student
 router.post('/api/teacher/student/new',function(req,res) {
-        console.log("Inside router to add new student",req.body);
+        console.log("Insiderouter to add new student",req.body);
         var newrecord = req.body;
         db.studentdetails
            .create(newrecord)
@@ -92,7 +83,8 @@ router.delete('/api/batch/student/delete/',(req,res) => {
 });
 
 // Get All batch details
-router.get("/api/teacher/myaccount/batch",(req,res) => {
+router.get("/api/teacher/batch/all",(req,res) => {
+      console.log("inside router to get all batch records");
         db.batchdetails.find({})
            .then((data) => {
                console.log("Batch details",data);
@@ -122,9 +114,18 @@ router.get("/api/teacher/batch/:searchstr",(req,res) => {
     db.batchdetails.find({})
 });
 
-/*
-router.use(function(req, res) {
-  res.sendFile(path.join(__dirname, "../client/build/index.html"));
-});*/
+// Student routes
+router.get('/api/students/login',function(req,res) {
+   console.log("Inside router",req.body);
+   db.Students
+     .findOne({_id: req.body.stdid})
+     .then(function(studentdet){
+       res.json(studentdet);
+     })
+     .catch(function(err){
+       res.json(err);
+     });
 
-module.exports = router;
+});
+
+module.exports =router;
