@@ -58,10 +58,10 @@ class Allbatches extends Component
               <tbody>
                     {stbatchrec.map((data,index) =>
                       <tr key={index}>
-                             <th>{data.recbatid}</th>
-                              <th>{data.recsubj}</th>
-                              <th>{data.reclevel}</th>
-                              <th>{data.recrate}</th>
+                             <td>{data.recbatid}</td>
+                              <td>{data.recsubj}</td>
+                              <td>{data.reclevel}</td>
+                              <td>{data.recrate}</td>
                       </tr>
                     )}
                </tbody>

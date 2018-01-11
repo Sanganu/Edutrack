@@ -1,4 +1,4 @@
-import React, { Component, Link } from 'react';
+import React, { Component } from 'react';
 //import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ReactDOM from 'react-dom';
 import Allbatches from './displayallbatchdetails';
@@ -15,8 +15,23 @@ class Teachermain extends Component
             canenter : false,
             vemail:'',
             vpword:''
-           };
+             };
          }
+         handleInputChange = (event) => {
+               const target = event.target;
+               const value = target.value;
+               const name  = target.name;
+               console.log('The Value in input change',value,name);
+
+               this.setState({
+                  [name]: value
+                } /*,
+                () =>{
+                  console.log('Set State in Main Section',value,name);
+                } */);
+         };
+
+
          logincheck = (event) => {
                event.preventDefault();
                console.log("Teacher's login plan is to implement OAuth, but feature deferred due to lack of time");
@@ -39,9 +54,9 @@ class Teachermain extends Component
                   return(<div>
                         <form className="fields">
                                 <label id ="lemail">Email Addess</label><br />
-                                <input className="textarea" type="text" name="this.state.vemail" id = "this.state.vemail" /><br />
+                                <input className="textarea" type="text" name="vemail" value={this.state.vemai} /><br />
                                 <label id = "lpsword">Password</label><br />
-                                <input className="textarea" type="password" name="this.state.vpword" id = "this.state.vpword" /><br />
+                                <input className="textarea" type="password" name="vpword" value ={this.state.vpword} /><br />
                           </form>
                           <button className ="btn btn-large-info" id = "blogin" onClick={this.logincheck}>Login</button>
 

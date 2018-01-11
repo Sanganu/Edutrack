@@ -37,6 +37,15 @@ const studentSchema = new Schema({
           batchid : [{
             type: Schema.Types.ObjectId,
             ref: 'batchdetails'
+          }],
+          attendace:[{
+            classid :{
+              type:Schema.Types.ObjectId,
+              ref:'classdetails'
+            },
+            present: {
+              type: Boolean
+            }
           }]
 
 });

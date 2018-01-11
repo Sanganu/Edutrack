@@ -26,15 +26,10 @@ const batchdetailsSchema = new Schema({
           type: Schema.Types.ObjectId,
           ref: 'studentdetails'
         }],
-        attendace:[{
-          classid :{
-            type:Schema.Types.ObjectId,
-            ref:'classdetails'
-          },
-          present: {
-            type: Boolean
-          }
-        }],
+        classid :{
+          type:Schema.Types.ObjectId,
+          ref:'classdetails'
+        },
        createdDate: {
           type:Date,
           default: Date.now

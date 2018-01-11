@@ -19,7 +19,7 @@ router.post('/api/teacher/batch/new',function(req,res) {
                      var vrmsg  = (err.errmsg).substr(0,6);
                         if( vrmsg === 'E11000')
                            {
-                             console.log("Batch details already exist -- Please delete batch and register again if this is a new batch");
+                             console.log("Batch ID already exist -- Please use different ID to create a new batch");
                              res.json({
                                  errid: vrmsg,
                                  errstring: "Batch details already exist -- Please delete old batch and register again if this is a new batch",
@@ -41,12 +41,30 @@ router.post('/api/teacher/batch/new',function(req,res) {
              }); //end catch section
 }); // end db.batchdetails
 
+// Route to get max
+/*
+router.get('/api/teacher/batch/maxid',function(req,res) {
+        console.log("in the router to get max");
 
+        db.batchdetails
+           .find({$max : "$batchid"})
+           .then(function(data){
+             res.json(data);
+           })
+           .catch(function(err){
+             if (err)
+             {
+               console.log("error...",err);
+               res.json(err);
+             }
+           });
+});
+*/
 ////Add New student And Update Batches table
 router.post('/api/teacher/student/new',function(req,res) {
         console.log("Insiderouter to add new student",req.body);
         var uname = (req.body.studentfname).substr(0,1) +(req.body.studentlname);
-        var pword = (req.body.parenphone).substr(0,3) + (req.body.studentfname);
+        var pword = (req.body.parentphonenumber).substr(0,3) + (req.body.studentfname);
         var newrecord = {
           studentfname :req.body.studentfname,
           studentlname: req.body.studentlname,
@@ -57,16 +75,26 @@ router.post('/api/teacher/student/new',function(req,res) {
           passw : pword,
           batchid:[req.body.batchid]
         };
+        var insertstudent = {
+             studentfname : '',
+             studentlname : '',
+             loginemail: ''
+        };
         db.studentdetails
            .create(newrecord)
            .then(function(dbstudentdetails){
-              insertedstudent = dbstudentdetails;
+              insertedstudent ={
+                studentfname : dbstudentdetails.studentfname,
+                studentlname : dbstudentdetails.studentlname,
+                loginemail : dbstudentdetails.loginemail
+              } ;
               console.log("Inserted student record",dbstudentdetails);
               return db.batchdetails.findOneAndUpdate({_id:req.body.batchid}, {$push:{students:dbstudentdetails._id}});
 
            })
            .then(function(data){
-             res.json(data);
+             console.log("Inserted student and updated batchdetails with studentid",data);
+             res.json(insertedstudent);
            })
            .catch(function(err){
              if (err)
@@ -74,7 +102,7 @@ router.post('/api/teacher/student/new',function(req,res) {
                var vrmsg  = (err.errmsg).substr(0,6);
                if( vrmsg === 'E11000')
                {
-                 console.log("Login already - already exist");
+                 console.log("Student Login - already exist");
 
                }
                else {
@@ -122,9 +150,8 @@ router.get("/api/teacher/batch/all",(req,res) => {
 })
 
 // Get All Student details for the batch
-router.get("/api/teacher/batch/student/:batchid", (req,res) => {
-  db.batchdetails.find({id:req.params.id})
-     .populate('students')
+router.get("/api/teacher/student/all/:batchid", (req,res) => {
+  db.studentdetails.find({id:req.params.id})
     .then((data) => {
          console.log(data);
          res.json(data);

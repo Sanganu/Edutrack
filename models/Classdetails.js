@@ -15,7 +15,6 @@ const classdetailsSchema = new Schema({
            type: String,
 
          },
-      ,
         batch: {
           type: Schema.Types.ObjectId,
           ref: 'studentdetails'

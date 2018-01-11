@@ -9,7 +9,7 @@ class Addstudent extends Component {
           loginemail: "",
           parentname: "",
           parentphonenumber: "",
-          studentrecs: ""
+          studentrecs: []
         };
 
     handleInputChange = (event) => {
@@ -30,28 +30,48 @@ class Addstudent extends Component {
         event.preventDefault();
        console.log("In Student Creation");
        let strecs = this.state.studentrecs;
-
-       axios.post('/api/teacher/student/new',
+       if( this.state.studentfname === "" ||
+            this.state.studentlname === "" ||
+             this.state.loginemail === "" ||
+             this.state.parentname === "" ||
+             this.state.parentphonenumber === "")
+             {
+               console.log("Empty fields not accepted");
+             }
+        else {
+        axios.post('/api/teacher/student/new',
                   {
                     studentfname: this.state.studentfname,
                     studentlname: this.state.studentlname,
                     parentname: this.state.parentname,
                     loginemail: this.state.loginemail,
-                    parentphonenumber: this.state.parentphonenumber,
-                    batchid: this.props.batchdet.bid
+                    parentphonenumber:    this.state.parentphonenumber,
+                    batchid:
+                     this.props.batchdet.bid
                   })
                   .then(res =>
                     {
-                      console.log("The response from adding student",res.data._id);
+                      console.log("The response from adding student",res.data._id,"Res",res);
                       let newstrec = {
                           stdfname : res.data.studentfname,
-                          stdlname : res.data.studentlname
+                          stdlname : res.data.studentlname,
+                          stdemail : res.data.loginemail
                       }
                       strecs.push(newstrec);
-                      this.setState({studentrecs : strecs});
+                      this.setState({studentrecs : strecs},
+                          () => {
+                            this.setState({
+                                  studentfname: '',
+                                  studentlname: '',
+                                  parentname: '',
+                                  loginemail: '',
+                                  parentphonenumber: '',
+                            })
+                          });
                     })
                   .catch(error => console.log("Error!!!!",error)
                 ); // End of axios
+              } //end if
     }; // end of handleStudentCreation
 
 
@@ -84,7 +104,18 @@ class Addstudent extends Component {
                          </label>
                           <button className = "btn btn-info"  name = "clcreation" onClick = {this.handleStudentCreation}>Create Student account</button>
                     </form>
-                    <Allstudents studentrec = {this.state.studentrecs}/>
+
+                    <table>
+                      <tbody>
+                       <tr>
+                            <th>Firstname</th>
+                            <th>Lastname</th>
+                            <th>Email</th>
+                       </tr>
+
+                         <Allstudents studentrec = {this.state.studentrecs}/>
+                     </tbody>
+                      </table>
               </div>
             ) //end return
       } // end render

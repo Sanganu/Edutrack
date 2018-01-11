@@ -15,16 +15,22 @@ class Createbatch extends Component {
           errmsg : '',
             };
     }
+    /*
     componentDidMount = () => {
+          console.log("In component Did mount");
           axios.get('/api/teacher/batch/maxid')
                .then(response =>
                  {
                    console.log("The max batch id",response,"Data ;",response.data);
                    this.setState({batchid : response.data.value+1});
+                 })
+                 .catch(error => {
+                     this.setState({errmsg: error.errstring +" Please check console for further details"});
+                     console.log("Error in getting max value -batchid",error.err);
                  });
 
     }
-
+    */
     handleInputChange = (event) => {
           const target = event.target;
           const value = target.value;
@@ -43,6 +49,16 @@ class Createbatch extends Component {
             event.preventDefault();
              console.log("In Class Creatio n state values",this.state);
              var myDate = new Date(this.state.startdate);
+             if( this.state.batchid === "" ||
+                 this.state.batchdesc === "" ||
+                 this.state.subject === "" ||
+                 this.state.level === "" ||
+                this.state.rateperhour === "")
+                {
+                  console.log("No Empty Fields Enter valid data");
+                  this.setState({errmsg : "No Empty Fields Enter valid data"});
+                }
+            else {
              axios.post('/api/teacher/batch/new',
                       {
                             batchid: this.state.batchid,
@@ -73,7 +89,7 @@ class Createbatch extends Component {
                         this.setState({errmsg: error.errstring +" Please check console for further details"});
                         console.log("Error in Adding Batch",error.err);
                     }); //end new batch creation - axios call
-
+                  } //end if
         }; // end handleclasscreation
 
       render() {
@@ -83,20 +99,20 @@ class Createbatch extends Component {
                        <h3 className = "subHeading">Create New Batch</h3>
                        <h5>{this.state.errmsg}</h5>
                     <form>
-                        <label className ="inline">Batch ID :{this.state.batchid}   </label>
-
+                        <label className ="inline">Batch ID (numbers only) :  </label><br />
+                         <input type = "text"   value={this.state.batchid} onChange = {this.handleInputChange} name = "batchid" /><br />
                          <label className ="inline">Batch Description  </label> <br />
-                             <input type = "text"   value={this.state.batchdesc} onChange = {this.handleInputChange} name = "batchdesc" />
-
-                         <select  value={this.state.subject} onChange = {this.handleInputChange} name ="subject" id="subject">
+                             <input type = "text"   value={this.state.batchdesc} onChange = {this.handleInputChange} name = "batchdesc" /><br />
+                         <label className ="inline">Subject :  </label><br />
+                         <select  value={this.state.subject} onChange = {this.handleInputChange} name ="subject" id="subject"><br />
                              <option value ='Music'>Music</option>
                              <option value ='Piano'>Piano</option>
                              <option value ='Tennis'>Tennis</option>
                              <option value ='Dance'>Dance</option>
-                         </select>
+                         </select><br />
                          <label className ="inline">Rate per class per student($) </label>
                          <input type = "text"   value={this.state.rateperhour} onChange = {this.handleInputChange} name = "rateperhour" />
-
+                         <label className ="inline">Level </label>
                            <select onChange = {this.handleInputChange} name ="level" id="level">
                                  <option value ='Beginner'>Beginner</option>
                                  <option value ='Intermediate'>Intermediate</option>

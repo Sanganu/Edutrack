@@ -9,12 +9,12 @@ class Allstudents extends Component
  //axios.get('/api/teachers/')
  componentDidMount = () => {
    console.log("Inside component did mount before placing the axios call");
-   let batchrecords = this.state.batchrecords;
+   let studentrecords = this.state.studentrecords;
 
    axios.get('/api/teacher/student/all/:batchid')
        .then(response =>
          {
-             //console.log("The Batch Details of  ",response.data);
+             //console.log("The student Details of  ",response.data);
              for (let i =0; i<response.data.length;i++)
              {
                 console.log("Records",response.data[i]._id,response.data[i].batchdesc,response.data[i].batchid,response.data[i].subject,response.data[i].level,response.data[i].rateperhour);
@@ -25,12 +25,12 @@ class Allstudents extends Component
                           reclevel: response.data[i].level,
                           recrate: response.data[i].rateperhour
                   }
-                batchrecords.push(currentrec);
+                studentrecords.push(currentrec);
               } // end for
-           this.setState({batchrecords : batchrecords}, () => { console.log("State of records",this.state.batchrecords)});
+           this.setState({studentrecords : studentrecords}, () => { console.log("State of records",this.state.batchrecords)});
          }) // end then
          .catch( error => {
-           console.log("Error in getting batch records!!!",error);
+           console.log("Error in getting all student records!!!",error);
          })
  } // end component did mount
 
@@ -38,14 +38,12 @@ class Allstudents extends Component
     render()
     {
            const studentrec = this.props.studentrec;
-            return(<div>
-                {studentrec.map((student,index) => (
-                  <tr key={studentrec._id}><th>{studentrec.studentfname}</th>
-                       <th>{studentrec.studentlname}</th>
-                       <th>{studentrec.loginemail}</th>
-                  </tr>))}
-            </div>
-            );
+            return(studentrec.map((data,index) => (
+                  <tr key={index}><td>{data.stdfname}</td>
+                       <td>{data.stdlname}</td>
+                       <td>{data.stdemail}</td>
+                  </tr>))
+              );
     }
 }
 
