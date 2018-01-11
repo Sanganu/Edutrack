@@ -5,10 +5,9 @@ class Addstudent extends Component {
     state = {
           studentfname: "",
           studentlname: "",
-          parentname: "",
           loginemail: "",
+          parentname: "",
           parentphonenumber: "",
-          bdetails: ""
         };
 
     handleInputChange = (event) => {
@@ -37,17 +36,30 @@ class Addstudent extends Component {
                     parentname: this.state.parentname,
                     loginemail: this.state.loginemail,
                     parentphonenumber: this.state.parentphonenumber,
-                    batchid: this.state.bdetails._id
+                    batchid: this.props.batchdet .bid
                   })
                   .then(res =>
                     {
-                      console.log("The response from adding student",res);
-                      this.props.onchange(res)
+                      console.log("The response from adding student",res.data._id);
+                    /*  axios.post('/api/teacher/batch/student/',
+                         {
+                           stdid: res.data._id,
+                           btid: this.props.batchdet._id
+                         })
+                         .then(response =>
+                         {
+                            console.log("Update Batch table with student Id",response);
+
+                         })
+                         .catch(err => {
+                           console.log("Error in updating batch with student id",err);
+                         })*/
+                      //this.props.onchange(res)
                       //window.location.reload();
                     })
-                    .catch(error => console.log("Error!!!!",error)
-                  );
-    };
+                  .catch(error => console.log("Error!!!!",error)
+                ); // End of axios
+    }; // end of handleStudentCreation
     // Axios request about class details
     /*componentDidMount = () => {
          axios.get('/api/batch/',{id:this.props.classid})
@@ -59,36 +71,39 @@ class Addstudent extends Component {
          );
       }
 */
+componentWillReceiveProps = () => {
+  console.log("Props---",this.props);
+}
       render() {
-        const batchdet = this.props.batchdet;
-        return(
-          <div>
-              <h1>Display Batch Details</h1>
-              <h4>Batch details</h4>
-                <h6>{this.batchdet.classdetails}</h6>
-                <p>{this.batchdet.starttimings}-{this.batchdet.endtimings}</p>
-                <p>{this.batchdet.level} {this.batchdet.rate} {this.batchdet.dayofweek}</p>
-                <h4>Add Students to the Batch</h4>
-                <form>
-                    <label className ="inline">
-                        <input type = "text"   value={this.state.studentfname} onChange = {this.handleInputChange} name = "studentfname" />Student Firstname
-                     </label>
-                    <label className ="inline">
-                        <input type = "text"   value={this.state.studentlname} onChange = {this.handleInputChange} name = "studentlname" />Student Lastname
-                      </label>
-                     <label className ="inline">
-                         <input type = "text"   value={this.state.loginemail} onChange = {this.handleInputChange} name = "loginemail" />Email
-                     </label>
-                     <label className ="inline">
-                         <input type = "text"   value={this.state.parentname} onChange = {this.handleInputChange} name = "parentname" />Parent/Guardian name
-                     </label>
-                     <label className ="inline">
-                         <input type = "text"   value={this.state.parentphonenumber} onChange = {this.handleInputChange} name = "parentphonenumber" />Parent Phone number
-                     </label>
-                      <button className = "btn btn-info"  name = "clcreation" onClick = {this.handleStudentCreation}>Create Class details</button>
-                </form>
-          </div>
-        ) //end return
+        const bdetails = this.props.batchdet;
+            return(
+              <div>
+                  <h1>Display Batch Details</h1>
+                  <h4>Batch details</h4>
+                    <h6>{bdetails.bid}</h6>
+                    <p>{bdetails.batchid}-{bdetails.batchdesc}</p>
+                    <p>{bdetails.subject} {bdetails.level} {bdetails.rateperhour}$</p>
+                    <h4>Add Students to the Batch</h4>
+                    <form>
+                        <label className ="inline">
+                            <input type = "text"   value={this.state.studentfname} onChange = {this.handleInputChange} name = "studentfname" />Student Firstname
+                         </label>
+                        <label className ="inline">
+                            <input type = "text"   value={this.state.studentlname} onChange = {this.handleInputChange} name = "studentlname" />Student Lastname
+                          </label>
+                         <label className ="inline">
+                             <input type = "text"   value={this.state.loginemail} onChange = {this.handleInputChange} name = "loginemail" />Email
+                         </label>
+                         <label className ="inline">
+                             <input type = "text"   value={this.state.parentname} onChange = {this.handleInputChange} name = "parentname" />Parent/Guardian name
+                         </label>
+                         <label className ="inline">
+                             <input type = "text"   value={this.state.parentphonenumber} onChange = {this.handleInputChange} name = "parentphonenumber" />Parent Phone number
+                         </label>
+                          <button className = "btn btn-info"  name = "clcreation" onClick = {this.handleStudentCreation}>Create Class details</button>
+                    </form>
+              </div>
+            ) //end return
       } // end render
 
 } // end class

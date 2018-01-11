@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class Studentmain extends Component
+class Visitors extends Component
 {
       render()
       {
            return(
-             <h1> Student Main Component</h1>
+             <h1>Visitors </h1>
            )
       }
 }
 
-export default Studentmain
+export default Visitors

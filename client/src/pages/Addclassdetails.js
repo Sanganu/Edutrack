@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class Studentmain extends Component
+class Addclassdetails extends Component
 {
       render()
       {
@@ -11,4 +11,4 @@ class Studentmain extends Component
       }
 }
 
-export default Studentmain
+export default Addclassdetails;

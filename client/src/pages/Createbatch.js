@@ -38,19 +38,35 @@ class Createbatch extends Component {
              axios.post('/api/teacher/batch/new',
                       {
                             batchid: this.state.batchid,
-                            subject: this.state.subject,
                             batchdesc : this.state.batchdesc,
+                            subject: this.state.subject,
                             level : this.state.level,
                             rateperhour : this.state.rateperhour
                       })
                   .then(response =>
                     {
-                      console.log("The response from adding class",response);
-                      console.log("The inserted record ID",response.data._id);
-                      this.setState({batchdet : response.data});
-                      this.props.onInsert(response.data._id)
-                      //window.location = '/teacher/batch/addstudent/'+response._id;
-                      //return <Addstudent />
+                        console.log("The response -newbatch- axios call-Createbatcg",response);
+                        console.log("The inserted record ID",response.data._id);
+                        // this.setState({
+                        //       batchid : "",
+                        //       batchdesc:"",
+                        //       subject: "Music",
+                        //       level: "Beginner",
+                        //       rateperhour: '30',
+                        //
+                        // });
+                        let newbatch = {
+                          bid : response.data._id,
+                          batchid : response.data.batchid,
+                          batchdesc:response.data.batchdesc,
+                          subject: response.data.subject,
+                          level: response.data.level,
+                          rateperhour: response.data.rateperhour,
+
+                        }
+                        this.props.onInsert(newbatch)
+                        //window.location = '/teacher/batch/addstudent/'+response._id;
+                        //return <Addstudent />
                     })
                     .catch(error => {
                         this.setState({errmsg: error.errstring +" Please check console for further details"});
@@ -63,7 +79,7 @@ class Createbatch extends Component {
         return(
                   <div>
 
-                       <h3 className = "subHeading">Create New Class</h3>
+                       <h3 className = "subHeading">Create New Batch</h3>
                        <h5>{this.state.errmsg}</h5>
                     <form>
                         <label className ="inline">Batch ID (numbers only)

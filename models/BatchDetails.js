@@ -22,14 +22,15 @@ const batchdetailsSchema = new Schema({
         rateperhour: {
           type: Number,
         },
+        students: [{
+          type: Schema.Types.ObjectId,
+          ref: 'studentdetails'
+        }],
        createdDate: {
           type:Date,
           default: Date.now
         },
-        classes: [{
-          type: Schema.Types.ObjectId,
-          ref: 'classdetails'
-        }]
+
 });
 
 

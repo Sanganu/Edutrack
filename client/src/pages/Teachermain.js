@@ -12,21 +12,40 @@ class Teachermain extends Component
          {
            super(props);
            this.state = {
-             studentid : '',
-             studentpassword: '',
-             teacherid : '',
-             teacherpassword: ''
+            canenter : false,
+            vemail:'',
+            vpword:''
            };
+         }
+         logincheck = (event) => {
+           event.preventDefault();
+           console.log("Teacher's login plan is to implement OAuth, but feature deferred");
+           console.log("Use myemail@yahoo.com abd welcome to enter site ");
+           if (this.state.vemail === "myemail@yahoo.com" &&
+               this.state.vpword === "welcome")
+               this.setState({canenter : true});
+            else {
+                this.setState({canenter : false});
+            }
          }
 
 
           render()
           {
                   return(<div>
-                                <Batchmain />
+                        <form class="fields">
+                                <label id ="lemail">Email Addess</label><br />
+                                <input class="textarea" type="text" name="this.state.vemail" id = "this.state.vemail" /><br />
+                                <label id = "lpsword">Password</label><br />
+                                <input class="textarea" type="password" name="this.state.vpword" id = "this.state.vpword" /><br />
+                                <button class="btn btn-large-info" id = "blogin" onClick={this.logincheck}>Login</button>
+                          </form>
+                              {this.state.canenter ? <Allbatches />
+                                                    : <div>
+                                                         <h1>Invalid Credentials - Please use right credentials</h1>
+                                                      </div>}
 
-                                <Allbatches />
-                        </div>
+                    </div>
                   ) ; //end return
           } //end render
 

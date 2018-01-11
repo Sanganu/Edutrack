@@ -35,30 +35,55 @@ router.post('/api/teacher/batch/new',function(req,res) {
                               err : err
                               });
                         }
-                        console.log(err);
-                    }    
+
+                    }
 
              }); //end catch section
 }); // end db.batchdetails
 
 
-////Add New student
+////Add New student And Update Batches table
 router.post('/api/teacher/student/new',function(req,res) {
         console.log("Insiderouter to add new student",req.body);
-        var newrecord = req.body;
+        var uname = (req.body.studentfname).substr(0,1) +(req.body.studentlname);
+        var pword = (req.body.parenphone).substr(0,3) + (req.body.studentfname);
+        var newrecord = {
+          studentfname :req.body.studentfname,
+          studentlname: req.body.studentlname,
+          parentname: req.body.parentname,
+          loginemail: req.body.loginemail,
+          parentphonenumber: req.body.parentphonenumber,
+          username : uname,
+          passw : pword,
+          batchid:[req.body.batchid]
+        };
         db.studentdetails
            .create(newrecord)
            .then(function(dbstudentdetails){
               insertedstudent = dbstudentdetails;
               console.log("Inserted student record",dbstudentdetails);
-              return db.batchdetails.findOneAndUpdate({_id:req.body.batchid}, {students:dbstudentdetails._id});
+              return db.batchdetails.findOneAndUpdate({_id:req.body.batchid}, {$push:{students:dbstudentdetails._id}});
+
            })
            .then(function(data){
              res.json(data);
            })
            .catch(function(err){
-             console.log("The Error",err)
-             res.json(err);
+             if (err)
+             {
+               var vrmsg  = (err.errmsg).substr(0,6);
+               if( vrmsg === 'E11000')
+               {
+                 console.log("Login already - already exist");
+
+               }
+               else {
+                 console.log("The Error",err)
+                 res.json(err);
+               }
+
+             }
+
            });
 });
 

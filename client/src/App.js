@@ -4,6 +4,10 @@ import Teachermain from "./pages/Teachermain"; //Both teacher and student login
 import Batchmain from "./pages/Batchmain" ; // teacher main page
 import Createbatch from "./pages/Createbatch";
 import Addstudent from "./pages/Addstudent";
+import Homepage from "./pages/Homepage";
+import Visitors from "./pages/Visitors";
+import Studentmain from "./pages/Studentmain";
+import Addclassdetails from "./pages/Addclassdetails";
 
 //import StudentLogin from "./pages/Student"
 //import NoMatch from "./pages/Static/NoMatch";
@@ -14,11 +18,15 @@ const App = () =>
  <Router>
           <div>
           <Switch>
-           <Route exact path = "/" component = {Teachermain}/>
-             <Route exact path="/teacher/batchmain" component={Batchmain} />
-             <Route exact path="/teacher/createbatch" component={Createbatch} />
-             <Route exact path ="/teacher/batch/addstudent/:batchid" component={Addstudent} />
-              <Redirect to = "/" />
+                   <Route exact path = "/" component = {Homepage}/>
+                   <Route exact path = "/teacher/tmain" component = {Teachermain}/>
+                   <Route exact path = "/other/students/loginpg" component = {Studentmain}/>
+                   <Route exact path = "/other/users" component = {Visitors}/>
+                   <Route exact path="/teacher/batchmain" component={Batchmain} />
+                   <Route exact path="/teacher/createbatch" component={Createbatch} />
+                   <Route exact path ="/teacher/batch/addstudent/:batchid" component={Addstudent} />
+                   <Route exact path ="/teacher/batch/classdetails" component={Addclassdetails} />
+                   <Redirect to = "/" />
             </Switch>
           </div>
   </Router>;
