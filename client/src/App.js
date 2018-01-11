@@ -8,7 +8,7 @@ import Homepage from "./pages/Homepage";
 import Visitors from "./pages/Visitors";
 import Studentmain from "./pages/Studentmain";
 import Addclassdetails from "./pages/Addclassdetails";
-
+import Allbatches from "./pages/displayallbatchdetails"
 //import StudentLogin from "./pages/Student"
 //import NoMatch from "./pages/Static/NoMatch";
 //import TeacherLogin from "./pages/teachers";
@@ -19,6 +19,8 @@ const App = () =>
           <div>
           <Switch>
                    <Route exact path = "/" component = {Homepage}/>
+                   <Route exact path = "/teacher/allbatch" component = {Allbatches}/>
+
                    <Route exact path = "/teacher/tmain" component = {Teachermain}/>
                    <Route exact path = "/other/students/loginpg" component = {Studentmain}/>
                    <Route exact path = "/other/users" component = {Visitors}/>

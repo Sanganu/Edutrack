@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Allstudents from './displayallstudents';
 
 class Addstudent extends Component {
     state = {
@@ -8,6 +9,7 @@ class Addstudent extends Component {
           loginemail: "",
           parentname: "",
           parentphonenumber: "",
+          studentrecs: ""
         };
 
     handleInputChange = (event) => {
@@ -26,8 +28,8 @@ class Addstudent extends Component {
 
     handleStudentCreation = (event) => {
         event.preventDefault();
-
        console.log("In Student Creation");
+       let strecs = this.state.studentrecs;
 
        axios.post('/api/teacher/student/new',
                   {
@@ -36,44 +38,24 @@ class Addstudent extends Component {
                     parentname: this.state.parentname,
                     loginemail: this.state.loginemail,
                     parentphonenumber: this.state.parentphonenumber,
-                    batchid: this.props.batchdet .bid
+                    batchid: this.props.batchdet.bid
                   })
                   .then(res =>
                     {
                       console.log("The response from adding student",res.data._id);
-                    /*  axios.post('/api/teacher/batch/student/',
-                         {
-                           stdid: res.data._id,
-                           btid: this.props.batchdet._id
-                         })
-                         .then(response =>
-                         {
-                            console.log("Update Batch table with student Id",response);
-
-                         })
-                         .catch(err => {
-                           console.log("Error in updating batch with student id",err);
-                         })*/
-                      //this.props.onchange(res)
-                      //window.location.reload();
+                      let newstrec = {
+                          stdfname : res.data.studentfname,
+                          stdlname : res.data.studentlname
+                      }
+                      strecs.push(newstrec);
+                      this.setState({studentrecs : strecs});
                     })
                   .catch(error => console.log("Error!!!!",error)
                 ); // End of axios
     }; // end of handleStudentCreation
-    // Axios request about class details
-    /*componentDidMount = () => {
-         axios.get('/api/batch/',{id:this.props.classid})
-             .then( response => {
-                  console.log("The Response",response);
 
-             })
-           .catch(error => console.log("Error!!!!",error)
-         );
-      }
-*/
-componentWillReceiveProps = () => {
-  console.log("Props---",this.props);
-}
+
+
       render() {
         const bdetails = this.props.batchdet;
             return(
@@ -100,8 +82,9 @@ componentWillReceiveProps = () => {
                          <label className ="inline">
                              <input type = "text"   value={this.state.parentphonenumber} onChange = {this.handleInputChange} name = "parentphonenumber" />Parent Phone number
                          </label>
-                          <button className = "btn btn-info"  name = "clcreation" onClick = {this.handleStudentCreation}>Create Class details</button>
+                          <button className = "btn btn-info"  name = "clcreation" onClick = {this.handleStudentCreation}>Create Student account</button>
                     </form>
+                    <Allstudents studentrec = {this.state.studentrecs}/>
               </div>
             ) //end return
       } // end render

@@ -15,7 +15,15 @@ class Createbatch extends Component {
           errmsg : '',
             };
     }
+    componentDidMount = () => {
+          axios.get('/api/teacher/batch/maxid')
+               .then(response =>
+                 {
+                   console.log("The max batch id",response,"Data ;",response.data);
+                   this.setState({batchid : response.data.value+1});
+                 });
 
+    }
 
     handleInputChange = (event) => {
           const target = event.target;
@@ -47,14 +55,7 @@ class Createbatch extends Component {
                     {
                         console.log("The response -newbatch- axios call-Createbatcg",response);
                         console.log("The inserted record ID",response.data._id);
-                        // this.setState({
-                        //       batchid : "",
-                        //       batchdesc:"",
-                        //       subject: "Music",
-                        //       level: "Beginner",
-                        //       rateperhour: '30',
-                        //
-                        // });
+
                         let newbatch = {
                           bid : response.data._id,
                           batchid : response.data.batchid,
@@ -82,21 +83,20 @@ class Createbatch extends Component {
                        <h3 className = "subHeading">Create New Batch</h3>
                        <h5>{this.state.errmsg}</h5>
                     <form>
-                        <label className ="inline">Batch ID (numbers only)
-                            <input type = "text"   value={this.state.batchid} onChange = {this.handleInputChange} name = "batchid" />
-                         </label>
-                         <label className ="inline">Batch Description
+                        <label className ="inline">Batch ID :{this.state.batchid}   </label>
+
+                         <label className ="inline">Batch Description  </label> <br />
                              <input type = "text"   value={this.state.batchdesc} onChange = {this.handleInputChange} name = "batchdesc" />
-                          </label>
+
                          <select  value={this.state.subject} onChange = {this.handleInputChange} name ="subject" id="subject">
                              <option value ='Music'>Music</option>
                              <option value ='Piano'>Piano</option>
                              <option value ='Tennis'>Tennis</option>
                              <option value ='Dance'>Dance</option>
                          </select>
-                         <label className ="inline">Rate per class per student($)
-                             <input type = "text"   value={this.state.rateperhour} onChange = {this.handleInputChange} name = "rateperhour" />
-                         </label>
+                         <label className ="inline">Rate per class per student($) </label>
+                         <input type = "text"   value={this.state.rateperhour} onChange = {this.handleInputChange} name = "rateperhour" />
+
                            <select onChange = {this.handleInputChange} name ="level" id="level">
                                  <option value ='Beginner'>Beginner</option>
                                  <option value ='Intermediate'>Intermediate</option>
@@ -113,10 +113,3 @@ class Createbatch extends Component {
 } // end class
 
 export default Createbatch;
-
-/*
-<label for="sttiming">Start Timings : </label>
-<input id="sttimhour" type="number" min="1" max="12" step="1" value ="1"/>
-{this.state.displaystudent ? <Addstudent batchd={this.state.batchdet}/> ? null}
-
-*/

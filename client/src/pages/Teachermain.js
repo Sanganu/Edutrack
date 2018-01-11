@@ -18,28 +18,33 @@ class Teachermain extends Component
            };
          }
          logincheck = (event) => {
-           event.preventDefault();
-           console.log("Teacher's login plan is to implement OAuth, but feature deferred");
-           console.log("Use myemail@yahoo.com abd welcome to enter site ");
-           if (this.state.vemail === "myemail@yahoo.com" &&
-               this.state.vpword === "welcome")
-               this.setState({canenter : true});
-            else {
-                this.setState({canenter : false});
-            }
+               event.preventDefault();
+               console.log("Teacher's login plan is to implement OAuth, but feature deferred due to lack of time");
+               console.log("Use myemail@yahoo.com and welcome to enter site ");
+               if (this.state.vemail === "myemail@yahoo.com" &&
+                   this.state.vpword === "welcome")
+                   {
+                      console.log('if');
+                     window.location = '/teacher/batchmain/';
+                   }
+                else {
+
+                    this.setState({canenter : false});
+                }
          }
 
 
           render()
           {
                   return(<div>
-                        <form class="fields">
+                        <form className="fields">
                                 <label id ="lemail">Email Addess</label><br />
-                                <input class="textarea" type="text" name="this.state.vemail" id = "this.state.vemail" /><br />
+                                <input className="textarea" type="text" name="this.state.vemail" id = "this.state.vemail" /><br />
                                 <label id = "lpsword">Password</label><br />
-                                <input class="textarea" type="password" name="this.state.vpword" id = "this.state.vpword" /><br />
-                                <button class="btn btn-large-info" id = "blogin" onClick={this.logincheck}>Login</button>
+                                <input className="textarea" type="password" name="this.state.vpword" id = "this.state.vpword" /><br />
                           </form>
+                          <button className ="btn btn-large-info" id = "blogin" onClick={this.logincheck}>Login</button>
+
                               {this.state.canenter ? <Allbatches />
                                                     : <div>
                                                          <h1>Invalid Credentials - Please use right credentials</h1>
@@ -74,8 +79,7 @@ export default Teachermain;
                type = "text"
          />
 
-      </label>
-      <label className ="">
+      </label>      <label className ="">
          Enter your password
          <input value={this.state.studentpassword}
                 onChange={this.handleInputChange}

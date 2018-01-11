@@ -16,8 +16,6 @@ class Batchmain extends Component {
           }
       };
 
-
-
       handleBatchCreated = (batchnew) => {
         //event.preventDefault();
         const batchdet = batchnew;
