@@ -47,11 +47,11 @@ class Addstudent extends Component {
                     loginemail: this.state.loginemail,
                     parentphonenumber:    this.state.parentphonenumber,
                     batchid:
-                     this.props.batchdet.bid
+                    this.props.batchdet.bid
                   })
                   .then(res =>
                     {
-                      console.log("The response from adding student",res.data._id,"Res",res);
+                       console.log("The response from adding student",res.data._id,"Res",res);
                       let newstrec = {
                           stdfname : res.data.studentfname,
                           stdlname : res.data.studentlname,
