@@ -57,3 +57,9 @@ body {
   padding: 10px;
   margin: 10px;
 }
+.subhead {
+  width: 90%;
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: bold;
+}

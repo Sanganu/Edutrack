@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Teacherheader from '../components/Teacherheader';
 
 class Studentmain extends Component
 {
@@ -12,30 +11,39 @@ class Studentmain extends Component
   }
     componentWillReceiveProps = () => {
       let stdid = this.props.data._id;
-
-      axios.get('/api/others/student/:'+stdid)
+     /*
+      axios.get('/api/others/student/class')
             .then(response =>
               {
                  console.log("The Response",response);
                  this.setState({
-                   stfname: response.data.studentfname,
-                   stlname: response.data.studentlname,
-                   stbatchid: response.data.batchid,
-                   stid: response.data._id
+
                  });
               })
             .catch( error => {
-              console.log("Error in getting student batch records!!!",error);
-            });
+              console.log("Error in getting student class records!!!",error);
+            }); */
     }
 
       render()
       {
            return(<div>
-                     <Teacherheader />
-                     <h4> Student </h4>
-                     <p>{this.state.stfname}</p>
-                     <p>{this.state.stlname}</p>
+
+                     <h4 className = "subhead">Welcome {this.props.studentdet.studentfname}    {this.props.studentdet.studentlname} </h4>
+                     <br />
+                     <div className = "row">
+                     <div className = "col-md-6">
+                         <p>Parent:{this.props.studentdet.parentname} </p>
+                         <p>Phone number:{this.props.studentdet.parentphonenumber}</p>
+                         <p>Email: {this.props.studentdet.loginemail}</p>
+                     </div>
+                     <div className = "col-md-6">
+                           <p>Batch ID: {this.props.studentdet.batchid.batchid}</p>
+                           <p>Batch Description{this.props.studentdet.batchid.batchdesc}</p>
+                           <p>level: {this.props.studentdet.batchid.level}</p>
+                           <p>Rate:{this.props.studentdet.batchid.rateperhour}</p>
+                      </div>
+                      </div>
                  </div>)
       }
 }
