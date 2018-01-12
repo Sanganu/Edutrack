@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Teacherheader from '../components/Teacherheader';
+
 //import Addstudent from "./Addstudent";
 
 class Createbatch extends Component {
@@ -95,33 +97,40 @@ class Createbatch extends Component {
       render() {
         return(
                   <div>
-
-                       <h3 className = "subHeading">Create New Batch</h3>
-                       <h5>{this.state.errmsg}</h5>
-                    <form>
-                        <label className ="inline">Batch ID (numbers only) :  </label><br />
-                         <input type = "text"   value={this.state.batchid} onChange = {this.handleInputChange} name = "batchid" /><br />
-                         <label className ="inline">Batch Description  </label> <br />
-                             <input type = "text"   value={this.state.batchdesc} onChange = {this.handleInputChange} name = "batchdesc" /><br />
-                         <label className ="inline">Subject :  </label><br />
-                         <select  value={this.state.subject} onChange = {this.handleInputChange} name ="subject" id="subject">
-                             <option value ='Music'>Music</option>
-                             <option value ='Piano'>Piano</option>
-                             <option value ='Tennis'>Tennis</option>
-                             <option value ='Dance'>Dance</option>
-                         </select><br />
-                         <label className ="inline">Rate per class per student($) </label>
-                         <input type = "text"   value={this.state.rateperhour} onChange = {this.handleInputChange} name = "rateperhour" />
-                         <label className ="inline">Level </label>
-                           <select onChange = {this.handleInputChange} name ="level" id="level">
-                                 <option value ='Beginner'>Beginner</option>
-                                 <option value ='Intermediate'>Intermediate</option>
-                                 <option value ='Advance'>Advance</option>
-                             </select>
-
-                         <button className = "btn btn-info"  name = "clcreation" onClick = {this.handleClassCreation}>Create Batch</button>
-                    </form>
-
+                            <Teacherheader />
+                           <h5 className = "subcr">Create New Batch</h5>
+                           <p className="errmsg">{this.state.errmsg}</p>
+                        <form className = "form-horizontal">
+                            <div className = "form-group">
+                               <label className ="inline">Batch ID (numbers only) :  </label>
+                               <input type = "text"   value={this.state.batchid} onChange = {this.handleInputChange} name = "batchid" /><br />
+                             </div>
+                             <div className = "form-group">
+                                 <label className ="inline">Batch Description  </label>
+                                 <input type = "text"   value={this.state.batchdesc} onChange = {this.handleInputChange} name = "batchdesc" /><br />
+                             </div>
+                             <div className = "form-group">
+                                     <label className ="inline">Subject :   </label>
+                                     <select  value={this.state.subject} onChange = {this.handleInputChange} name ="subject" id="subject">
+                                         <option value ='Music'>Music</option>
+                                         <option value ='Piano'>Piano</option>
+                                         <option value ='Dance'>Dance</option>
+                                     </select><br />
+                             </div>
+                             <div className = "form-group">
+                                 <label className ="inline">Rate per class per student($) </label>
+                                 <input type = "text"   value={this.state.rateperhour} onChange = {this.handleInputChange} name = "rateperhour" />
+                            </div>
+                            <div className = "form-group">
+                                 <label className ="inline">Level : </label>
+                                 <select onChange = {this.handleInputChange} name ="level" id="level">
+                                     <option value ='Beginner'>Beginner</option>
+                                     <option value ='Intermediate'>Intermediate</option>
+                                     <option value ='Advance'>Advance</option>
+                                 </select>
+                            </div>
+                             <button className = "btn btn-info"  name = "clcreation" onClick = {this.handleClassCreation}>Create Batch</button>
+                        </form>
                   </div>
               ) // end of return
       } // end of render

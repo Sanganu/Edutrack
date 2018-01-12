@@ -30,10 +30,8 @@ class Batchmain extends Component {
       render() {
 
         const  brecords =this.state.batchdet;
-
         return(
            <div>
-               <h1> Teacher Page - Batch Details</h1>
                {this.state.displaybatch ? <Createbatch
                                          onInsert={this.handleBatchCreated} />
                          : <Addstudent batchdet = {brecords}

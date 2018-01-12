@@ -6,17 +6,17 @@ import Addclassdetails from './Addclassdetails';
 import Teacherheader from '../components/Teacherheader';
 
 
-class Allbatches extends Component
+class Allclasses extends Component
 {
    state = {
-     batchrecords: []
+     classrecords: []
    }
   //axios.get('/api/teachers/')
   componentDidMount = () => {
-    console.log("Inside component did mount before placing the axios call");
-    let batchrecords = this.state.batchrecords;
+    console.log("all class =Inside component did mount before placing the axios call");
+    let classrecords = this.state.classrecords;
 
-    axios.get('/api/teacher/batch/all')
+    axios.get('/api/teacher/batch/class/all/:'+"")
         .then(response =>
           {
             //console.log("The Batch Details of  ",response.data);
@@ -24,14 +24,14 @@ class Allbatches extends Component
             {
                console.log("Records",response.data[i]._id,response.data[i].batchdesc,response.data[i].batchid,response.data[i].subject,response.data[i].level,response.data[i].rateperhour);
                  let currentrec = {
-                         recid: response.data[i]._id,
+                         classid: response.data[i]._id,
                          recbatid: response.data[i].batchid,
                          recdesc: response.data[i].batchdesc,
                          recsubj: response.data[i].subject,
                          reclevel: response.data[i].level,
                          recrate: response.data[i].rateperhour
                  }
-               batchrecords.push(currentrec);
+               classrecords.push(currentrec);
             } // end for
             this.setState({batchrecords : batchrecords}, () => { console.log("State of records",this.state.batchrecords)});
           }) // end then
@@ -39,22 +39,11 @@ class Allbatches extends Component
             console.log("Error in getting batch records!!!",error);
           });
   } // end component did mount
-  onClassclick = () => {
-    this.setState({displayclass : true});
-  }
-/*
-   deletebatchdetails = (event) => {
-     event.preventDefault();
-     console.log("Event is",event,": key :",event.key);
-   }
 
- updatebatchdetils = (event) => {
-     event.preventDefault();
-     console.log("In update batch fields")
- }*/
+
     render()
     {
-      const stbatchrec = this.state.batchrecords;
+      const classrec = this.state.classrecords;
       return(<div>
               <Teacherheader />
               <h6 className ="tablehead">Batch Details </h6>
@@ -63,12 +52,11 @@ class Allbatches extends Component
                     <tbody>
                      <tr>
                       <td>Batch ID</td>
-                      <td>Desription</td>
                       <td>Class</td>
                       <td>Level</td>
                       <td>Rate/class/student</td>
                       </tr>
-                          {stbatchrec.map((data,index) =>
+                          {classrec.map((data,index) =>
                             <tr key={index}>
                                    <td>{data.recbatid}</td>
                                    <td>{data.recdesc}</td>
@@ -88,7 +76,7 @@ class Allbatches extends Component
             </div>); // end return
       } // end render
 } //end allbatches
-export default Allbatches;
+export default Allclasses;
 
 /*
 <button className ="btn btn-large-info" id = "blogin" onClick={this.onClassclick}>Add Class Details</button>

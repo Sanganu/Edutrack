@@ -41,25 +41,7 @@ router.post('/api/teacher/batch/new',function(req,res) {
              }); //end catch section
 }); // end db.batchdetails
 
-// Route to get max
-/*
-router.get('/api/teacher/batch/maxid',function(req,res) {
-        console.log("in the router to get max");
 
-        db.batchdetails
-           .find({$max : "$batchid"})
-           .then(function(data){
-             res.json(data);
-           })
-           .catch(function(err){
-             if (err)
-             {
-               console.log("error...",err);
-               res.json(err);
-             }
-           });
-});
-*/
 ////Add New student And Update Batches table
 router.post('/api/teacher/student/new',function(req,res) {
         console.log("Insiderouter to add new student",req.body);
@@ -131,18 +113,35 @@ router.get("/api/teacher/batch/all",(req,res) => {
            });
 })
 
-// Get All Student details for the batch
-router.get("/api/teacher/student/all/:id", (req,res) => {
-  db.batchdetails.find({id:req.params.id})
-
-    .then((data) => {
-         console.log(data);
-         res.json(data);
-    })
-    .catch((err) => {
-      res.json(err);
-    });
+// Add class details -Get All Student details for the batch for class entry
+router.get("/api/teacher/batch/:batchid", (req,res) => {
+  console.log("In router",req.params.batchid);
+  db.batchdetails.findOne({_id:req.params.batchid})
+     .populate('students')
+      .then((data) => {
+           console.log("Result from batch - student",data);
+           res.json(data);
+      })
+      .catch((err) => {
+        console.log("Error is fetching records",err);
+        res.json(err);
+      });
 });
+/*
+// Add class details -Get All Student details for the batch for class entry
+router.get("/api/teacher/student/all/:batchid", (req,res) => {
+  console.log("In router");
+  db.batchdetails.find({batchid:req.params.batchid})
+     .populate('students')
+      .then((data) => {
+           console.log("Result from batch - student",data);
+           res.json(data);
+      })
+      .catch((err) => {
+        console.log("Error is fetching records",err);
+        res.json(err);
+      });
+}); */
 
 //Search Option:
 router.get("/api/teacher/batch/:searchstr",(req,res) => {
@@ -158,6 +157,7 @@ router.post('/api/others/student/login',function(req,res) {
                {username : req.body.suname},
                {passw: req.body.spword}
                ]})
+     .populate('batchid')
      .then(function(studentdet){
        console.log("Valid student login",studentdet);
        res.json(studentdet);
@@ -168,11 +168,37 @@ router.post('/api/others/student/login',function(req,res) {
      });
 
 });
+
+////Add Class detaisl And Update Batches table
+router.post('/api/teacher/batch/class/new',function(req,res) {
+        console.log("Insiderouter to add new student",req.body);
+      var newrecord = req.body;
+        db.classdetails
+           .create(newrecord)
+           .then(function(dbclassdetails)
+           {
+              return db.batchdetails.findOneAndUpdate({_id:req.body.batchid}, {$push:{classid:dbclassdetails._id}});
+            })
+           .then(function(data){
+             console.log("Inserted class details and updated batchdetails with studentid",data);
+             res.json(insertedstudent);
+           })
+           .catch(function(err){
+             if (err)
+             {
+                 console.log("The Error",err)
+                 res.json(err);
+               }
+
+           });
+});
+
+
 //Get Student details with populat on batch - after valid login
 router.get('/api/other/student/:stid',(req,res) =>
 {
      db.studentdetails
-      .findone({id:req.params.id})
+      .findone({_id:req.params.id})
       .populate({path:'batchid'})
       .exec(function(err,data){
         if (err) return res.json(err);
@@ -188,7 +214,27 @@ router.get('/api/other/student/:stid',(req,res) =>
         console.log("Error in fetching student - batch records",err);
         res.json(err);
       });*/
-})
+});
+
+// Route to get max
+/*
+router.get('/api/teacher/batch/maxid',function(req,res) {
+        console.log("in the router to get max");
+
+        db.batchdetails
+           .find({$max : "$batchid"})
+           .then(function(data){
+             res.json(data);
+           })
+           .catch(function(err){
+             if (err)
+             {
+               console.log("error...",err);
+               res.json(err);
+             }
+           });
+});
+*/
 
 //Delete Student
 router.delete('/api/batch/student/delete/',(req,res) => {
