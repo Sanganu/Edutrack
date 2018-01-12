@@ -10,7 +10,7 @@ import Studentmain from "./pages/Studentmain";
 import Classentry from "./pages/Classentry";
 import Allbatches from "./pages/displayallbatchdetails"
 import Studentlogin from "./pages/Studentlogin";
-
+import Addclass from "./pages/Addclassdetails";
 
 
 const App = () =>
@@ -25,7 +25,7 @@ const App = () =>
                    <Route exact path="/teacher/batchmain" component={Batchmain} />
                    <Route exact path="/teacher/createbatch" component={Createbatch} />
                    <Route exact path ="/teacher/batch/addstudent/:batchid" component={Addstudent} />
-                   <Route exact path ="/teacher/batch/addclass" component={Classentry} />
+                   <Route exact path ="/teacher/batch/addclass" component={Addclass} />
                    <Redirect to = "/" />
             </Switch>
           </div>

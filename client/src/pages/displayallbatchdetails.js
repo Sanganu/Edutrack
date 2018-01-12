@@ -42,16 +42,7 @@ class Allbatches extends Component
   onClassclick = () => {
     this.setState({displayclass : true});
   }
-/*
-   deletebatchdetails = (event) => {
-     event.preventDefault();
-     console.log("Event is",event,": key :",event.key);
-   }
 
- updatebatchdetils = (event) => {
-     event.preventDefault();
-     console.log("In update batch fields")
- }*/
     render()
     {
       const stbatchrec = this.state.batchrecords;

@@ -3,7 +3,7 @@ import axios from 'axios';
 import Classentry from './Classentry';
 import Teacherheader from '../components/Teacherheader';
 
-class Addclassdetails extends Component
+class Addclass extends Component
 {
 
         constructor(props)
@@ -115,7 +115,7 @@ class Addclassdetails extends Component
       }
 }
 
-export default Addclassdetails;
+export default Addclass;
 
 
 /*

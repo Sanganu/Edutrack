@@ -82,37 +82,58 @@ class Addstudent extends Component {
             return(
               <div>
                  <Teacherheader />
-                    <div className = "container">
+                    <div className = "row">
+                        <div className = "col-sm-6">
                             <p>Batch ID:   {bdetails.batchid}</p>
                             <label>Batch description:  {bdetails.batchdesc}</label>
+                        </div>
+                        <div className = "col-sm-6">
                             <p>Subject:   {bdetails.subject}</p>
-                            <label>Level: {bdetails.level}</label>
-                            <label>Rate: {bdetails.rateperhour}$</label>
+                            <p>Level: {bdetails.level}</p>
+                            <p>Rate: {bdetails.rateperhour}$</p>
+                        </div>
                      </div>
-                    <h5 className = "subcr">Add Students to the Batch</h5>
-                    <form className = "form-inline">
-                        <div className = "form-group">
-                            <label className ="inline">Student Firstname </label>
-                            <input type = "text"   value={this.state.studentfname} onChange = {this.handleInputChange} name = "studentfname" />
-                        </div>
-                        <div className = "form-group">
-                             <label className ="inline">Student Lastname  </label>
-                             <input type = "text"   value={this.state.studentlname} onChange = {this.handleInputChange} name = "studentlname" />
-                        </div>
-                        <div className = "form-group">
-                             <label className ="inline">Email </label>
-                             <input type = "text"   value={this.state.loginemail} onChange = {this.handleInputChange} name = "loginemail" />
-                        </div>
-                         <div className = "form-group">
-                             <label className ="inline">Parent/Guardian name   </label>
-                             <input type = "text"   value={this.state.parentname} onChange = {this.handleInputChange} name = "parentname" />
+                    
+                    <h5 className = "subhead">Add Students to the Batch</h5>
+                    <br />
+                    <form>
+                       <div className = "row">
+                         <div className = "col-md-4">
+                                  <div className = "form-group">
+                                      <label>Student Firstname </label>
+                                      <input type = "text"   value={this.state.studentfname} onChange = {this.handleInputChange} name = "studentfname" />
+                                  </div>
                          </div>
-                         <div className = "form-group">
-                             <label className ="inline">Parent Phone number</label>
-                             <input type = "text"   value={this.state.parentphonenumber} onChange = {this.handleInputChange} name = "parentphonenumber" />
+                         <div className = "col-md-4">
+                                  <div className = "form-group">
+                                       <label>Student Lastname  </label>
+                                       <input type = "text"   value={this.state.studentlname} onChange = {this.handleInputChange} name = "studentlname" />
+                                  </div>
+                         </div>
+                         <div className = "col-md-4">
+                                 <div className = "form-group">
+                                    <label className ="inline">Parent/Guardian name   </label>
+                                    <input type = "text"   value={this.state.parentname} onChange = {this.handleInputChange} name = "parentname" />
+                                 </div>
+                         </div>
+                      </div>
+                      <div className = "row">
+                          <div className = "col-md-4">
+                                    <div className = "form-group">
+                                         <label classame ="inline">Email </label>
+                                         <input type = "text"   value={this.state.loginemail} onChange = {this.handleInputChange} name = "loginemail" />
+                                    </div>
                           </div>
-
-                          <button className = "btn btn-info"  name = "clcreation" onClick = {this.handleStudentCreation}>Create Student account</button>
+                          <div className = "col-md-4">
+                             <div className = "form-group">
+                                 <label className ="inline">Parent Phone number</label>
+                                 <input type = "text"   value={this.state.parentphonenumber} onChange = {this.handleInputChange} name = "parentphonenumber" />
+                              </div>
+                          </div>
+                          <div className = "col-md-4">
+                              <button className = "btn btn-info"  name = "clcreation" onClick = {this.handleStudentCreation}>Create Student account</button>
+                           </div>
+                        </div>
                     </form>
                      <br />
                       <h6 className ="tablehead">Stuent Details </h6>
