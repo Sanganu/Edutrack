@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Teacherheader from '../components/Teacherheader';
 
 class Studentmain extends Component
 {
@@ -31,11 +32,11 @@ class Studentmain extends Component
       render()
       {
            return(<div>
-             <h1> Student Main Component</h1>
-             <p>{this.state.stfname}</p>
-             <p>{this.state.stlname}</p>
-             </div>
-           )
+                     <Teacherheader />
+                     <h4> Student </h4>
+                     <p>{this.state.stfname}</p>
+                     <p>{this.state.stlname}</p>
+                 </div>)
       }
 }
 

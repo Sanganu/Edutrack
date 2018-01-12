@@ -2,6 +2,7 @@ import React, { Component, Link } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Studentmain from './Studentmain';
+import Teacherheader from '../components/Teacherheader';
 
 
 class Studentlogin extends Component
@@ -11,12 +12,12 @@ class Studentlogin extends Component
                    super(props);
                    this.state = {
                           canenter : '',
-                          invalid:'',
+                          invalid:false,
                           vemail:'',
                           vpword:'',
                           vuname: '',
                           showstlogin: true,
-                          studentrecord:''
+                          studentrecord:{}
                      };
 
                  } //end constructor
@@ -43,7 +44,7 @@ class Studentlogin extends Component
                            this.state.vuname === "")
                            {
                               console.log('Enter Valid Credentials in all fields');
-                            // window.location = '/teacher/batchmain/';
+                              this.setState({invalid:true});
 
                            }
                         else {
@@ -62,7 +63,10 @@ class Studentlogin extends Component
                                        this.setState({canenter : true,
                                                       invalid : false,
                                                       showstlogin:false,
-                                                      studentrecord:response.data});
+                                                      studentrecord:response.data},
+                                                      () => {
+                                                        console.log("State updates",this.state.studentrecord);
+                                                      });
                                      }
                                      else {
                                        this.setState({errmsg: " Invalid Credentials .. Enter valid credentials"});
@@ -87,24 +91,34 @@ class Studentlogin extends Component
                   render()
                   {
                           return(<div>
+                                 <Teacherheader/>
+                                 {this.state.invalid ? <div>
+                                                      <h5 className ="errmsg">Invalid Credentials - Please use right credentials</h5>
+                                                     </div>: <div></div>}
                                  {this.state.showstlogin ?
                                    <div>
                                             <h3>Student Login </h3>
-                                            <form className="fields">
+                                            <form className="form-inline">
+                                                <div className = "form-group">
                                                     <label id ="lemail">Email Addess</label><br />
                                                     <input className="textarea" onChange = {this.handleInputChange} type="text" name="vemail" value={this.state.vemai} /><br />
+                                                </div>
+                                                <div className = "form-group">
                                                     <label id ="lemail">User Name</label><br />
                                                     <input className="textarea" onChange = {this.handleInputChange} type="text" name="vuname" value={this.state.vuname} /><br />
+                                                </div>
+                                                 <div className = "form-group">
                                                     <label id = "lpsword">Password</label><br />
                                                     <input className="textarea" onChange = {this.handleInputChange} type="password" name="vpword" value ={this.state.vpword} /><br />
+                                                 </div>
+                                                 <br />
+                                                   <button className ="btn btn-large-info" id = "blogin" onClick={this.logincheck}>Login</button>
                                               </form>
-                                              <button className ="btn btn-large-info" id = "blogin" onClick={this.logincheck}>Login</button>
+
                                    </div>
                                   :  <div></div> }
                                   {this.state.canenter ? <Studentmain studentdet = {this.state.studentrecord}/> : <div></div>}
-                                  {this.state.invalid ? <div>
-                                                       <h1>Invalid Credentials - Please use right credentials</h1>
-                                                      </div>: <div></div>}
+
                               </div>
                            ) ; //end return
                   } //end render
