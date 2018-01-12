@@ -5,6 +5,7 @@ import Allbatches from './displayallbatchdetails';
 import Batchmain from './Batchmain';
 import Createbatch from './Createbatch';
 import Visitors from './Visitors';
+import Header from '../components/Header';
 
 class Teachermain extends Component
 {
@@ -61,20 +62,26 @@ class Teachermain extends Component
           render()
           {
                   return( <div>
+
                         {this.state.logindisp ?
                              <div>
+                             <Header />
                             <form className="fields">
+                                 <div className = "form-group">
                                     <label id ="lemail">Email Addess</label><br />
                                     <input className="textarea" onChange = {this.handleInputChange} type="text" name="vemail" value={this.state.vemai} /><br />
+                                </div>
+                                <div className = "form-group">
                                     <label id = "lpsword">Password</label><br />
                                     <input className="textarea" onChange = {this.handleInputChange} type="password" name="vpword" value ={this.state.vpword} /><br />
-                              </form>
-                              <button className ="btn btn-large-info" id = "blogin" onClick={this.logincheck}>Login</button>
+                                </div>
+                              </form> <br />
+                              <button className ="btn btn-lg btn-info" id = "blogin" onClick={this.logincheck}>Login</button>
                               </div>
                           : <div></div>}
                               {this.state.canenter ? <Allbatches /> : <div></div>}
                               {this.state.invalid ? <div>
-                                                         <h1>Invalid Credentials - Please use right credentials</h1>
+                                                         <h6 className ="errmsg">Invalid Credentials - Please use right credentials</h6>
                                                       </div>: <div></div>}
 
                          </div>

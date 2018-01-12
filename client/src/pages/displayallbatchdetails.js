@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Listbatch from './Listbatch';
 import Addclassdetails from './Addclassdetails';
+import Teacherheader from '../components/Teacherheader';
+
 
 class Allbatches extends Component
 {
@@ -53,30 +55,39 @@ class Allbatches extends Component
     {
       const stbatchrec = this.state.batchrecords;
       return(<div>
-              <h1>All Batches </h1>
-              <table>
-              <tbody>
-               <tr>
-                <td>Batch ID</td>
-                <td>Class</td>
-                <td>Level</td>
-                <td>Rate/hour/student</td>
-                </tr>
-                    {stbatchrec.map((data,index) =>
-                      <tr key={index}>
-                             <td>{data.recbatid}</td>
-                              <td>{data.recsubj}</td>
-                              <td>{data.reclevel}</td>
-                              <td>{data.recrate}</td>
+              <Teacherheader />
+              <h6 className ="tablehead">Batch Details </h6>
+              <div className = "table-responsive">
+                    <table className = "table table-hover">
+                    <tbody>
+                     <tr>
+                      <td>Batch ID</td>
+                      <td>Class</td>
+                      <td>Level</td>
+                      <td>Rate/class/student</td>
                       </tr>
-                    )}
-               </tbody>
-              </table>
-              <button className ="btn btn-large-info" id = "blogin" onClick={this.onClassclick}>Add Class Details</button>
-              {this.displayclass ? <Addclassdetails b
-                trecs = {this.state.batchrecords}/> :<div></div>}
-              <Link to = '/teacher/batchmain'>Create New Batch</Link>
+                          {stbatchrec.map((data,index) =>
+                            <tr key={index}>
+                                   <td>{data.recbatid}</td>
+                                    <td>{data.recsubj}</td>
+                                    <td>{data.reclevel}</td>
+                                    <td>{data.recrate}</td>
+                            </tr>
+                          )}
+                     </tbody>
+                    </table>
+              </div>
+              <div className = "Navbar">
+                    <Link to = '/teacher/addclass' className = 'mainlink'>Add Class details</Link><br />
+                     <Link to = '/teacher/batchmain' className = 'mainlink'>Create New Batch</Link><br />
+                     <Link to ='/teacher/student' className = 'mainlink'>Search Student Records</Link>
+              </div>
             </div>); // end return
       } // end render
 } //end allbatches
 export default Allbatches;
+
+/*
+<button className ="btn btn-large-info" id = "blogin" onClick={this.onClassclick}>Add Class Details</button>
+{this.displayclass ? <Addclassdetails btrecs = {this.state.batchrecords}/> :<div></div>}
+*/

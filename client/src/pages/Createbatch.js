@@ -104,7 +104,7 @@ class Createbatch extends Component {
                          <label className ="inline">Batch Description  </label> <br />
                              <input type = "text"   value={this.state.batchdesc} onChange = {this.handleInputChange} name = "batchdesc" /><br />
                          <label className ="inline">Subject :  </label><br />
-                         <select  value={this.state.subject} onChange = {this.handleInputChange} name ="subject" id="subject"><br />
+                         <select  value={this.state.subject} onChange = {this.handleInputChange} name ="subject" id="subject">
                              <option value ='Music'>Music</option>
                              <option value ='Piano'>Piano</option>
                              <option value ='Tennis'>Tennis</option>

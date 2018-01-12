@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import Header from './components/header';
+import Header from '../components/Header';
 
 class Homepage extends Component {
 
@@ -8,14 +8,11 @@ class Homepage extends Component {
       {
          return (
          <div>
-                 <div className = "Jumbotron">
-                     <h1>Giksha Solutions</h1>
-                     <h3>Class management solution for Independant Teachers</h3>
-                </div>
+                <Header />
                 <div className = "Navbar">
-                    <Link to ="/teacher/tmain">Teachers login</Link><br />
-                    <Link to ="/other/students/loginpg">Student Login</Link><br />
-                    <Link to ="/other/users">Visitors</Link><br />
+                    <Link to ="/teacher/tmain" className="mainlink">Teachers login</Link><br />
+                    <Link to ="/other/students/loginpg" className="mainlink">Student Login</Link><br />
+                    <Link to ="/other/users" className="mainlink">Visitors</Link><br />
                 </div>
            </div>
          );

@@ -3,3 +3,47 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+.form-group {
+  padding: 20px;
+
+}
+.mylg {
+  padding-left: 30px;
+}
+.errmsg {
+  color: red;
+}
+.jumbotron {
+  max-height: 150px;
+  height: 150px;
+  background-color: black;
+  color: white;
+  font-family: 'Lobster', cursive;
+  text-align: center;
+}
+.jumbotron h1{
+  font-size: 40px;
+}
+.mainlink {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  color: black;
+  padding-left: 40px;
+}
+
+.Navbar {
+  border: 1px solid black;
+  margin:20px;
+  padding: 20px;
+}
+
+.btn-info {
+  background-color: black;
+  padding-left: 30px;
+  margin-left: 25px;
+  font-family: 'Play', sans-serif;
+}
+
+.tablehead {
+  text-align: center;
+}

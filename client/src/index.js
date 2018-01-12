@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {GoogleAPI, GoogleLogin,GoogleLogout} from 'react-google-oauth';
+//import {GoogleAPI, GoogleLogin,GoogleLogout} from 'react-google-oauth';
 import './index.css';
 import App from './App';
 
@@ -9,7 +9,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 /*
 ReactDOM.render(
-          <GoogleAPI clentId = "729258013011-gf6tpb74g19eiho8g125uohso22murrg.apps"
+          <GoogleAPI clentId = ""
                     onUpdateSigninStatus ={() => {return <App />}}
                     onInitFailure = {() => {return(<h1>Unauthorised</h1>)}} >
                     <div>
