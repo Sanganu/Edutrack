@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import Createbatch from './Createbatch';
 import Addstudent from './Addstudent';
-//import Allstudents from './displayallstudents';
-//import Allbatches from './displayallbatchdetails';
-//import axios from 'axios';
-
-//Need to api call for Google calendar
 
 class Batchmain extends Component {
       constructor(props) {

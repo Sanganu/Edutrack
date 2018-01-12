@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import axios from 'axios';
+import Header from './components/header';
 
 class Homepage extends Component {
 
@@ -13,9 +13,9 @@ class Homepage extends Component {
                      <h3>Class management solution for Independant Teachers</h3>
                 </div>
                 <div className = "Navbar">
-                    <Link to ="/teacher/tmain">Teachers login</Link>
-                    <Link to ="/other/students/loginpg">Student Login</Link>
-                    <Link to ="/other/users">Visitors</Link>
+                    <Link to ="/teacher/tmain">Teachers login</Link><br />
+                    <Link to ="/other/students/loginpg">Student Login</Link><br />
+                    <Link to ="/other/users">Visitors</Link><br />
                 </div>
            </div>
          );

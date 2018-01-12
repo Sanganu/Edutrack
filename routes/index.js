@@ -115,6 +115,81 @@ router.post('/api/teacher/student/new',function(req,res) {
            });
 });
 
+
+
+// Get All batch details
+router.get("/api/teacher/batch/all",(req,res) => {
+      console.log("inside router to get all batch records");
+        db.batchdetails.find({})
+           .then((data) => {
+               console.log("Batch details",data);
+               res.json(data);
+           })
+           .catch((err) => {
+             console.log("Error in fetching all batch details",err);
+             res.json(err);
+           });
+})
+
+// Get All Student details for the batch
+router.get("/api/teacher/student/all/:id", (req,res) => {
+  db.batchdetails.find({id:req.params.id})
+
+    .then((data) => {
+         console.log(data);
+         res.json(data);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
+//Search Option:
+router.get("/api/teacher/batch/:searchstr",(req,res) => {
+    db.batchdetails.find({})
+});
+
+// Student Login route
+router.post('/api/others/student/login',function(req,res) {
+   console.log("Inside route to validate student loginemail",req.body);
+   db.studentdetails
+     .findOne({ $and:[
+                {loginemail : req.body.semail},
+               {username : req.body.suname},
+               {passw: req.body.spword}
+               ]})
+     .then(function(studentdet){
+       console.log("Valid student login",studentdet);
+       res.json(studentdet);
+     })
+     .catch(function(err){
+       console.log("Error - Invalid Student Credentials",err);
+       res.json(err);
+     });
+
+});
+//Get Student details with populat on batch - after valid login
+router.get('/api/other/student/:stid',(req,res) =>
+{
+     db.studentdetails
+      .findone({id:req.params.id})
+      .populate({path:'batchid'})
+      .exec(function(err,data){
+        if (err) return res.json(err);
+        console.log('The Result from fetch student and batch',data);
+        res.json(data);
+      })
+      /*
+      .then((data) => {
+        console.log("Fetch records student populate batch",data);
+         res.json(data);
+      })
+      .catch((err) => {
+        console.log("Error in fetching student - batch records",err);
+        res.json(err);
+      });*/
+})
+
 //Delete Student
 router.delete('/api/batch/student/delete/',(req,res) => {
           db.batchdetails.findone({_id: req.body.batchid})
@@ -133,51 +208,6 @@ router.delete('/api/batch/student/delete/',(req,res) => {
               console.log("Error in deleting student details",err);
               res.json(err);
             });
-});
-
-// Get All batch details
-router.get("/api/teacher/batch/all",(req,res) => {
-      console.log("inside router to get all batch records");
-        db.batchdetails.find({})
-           .then((data) => {
-               console.log("Batch details",data);
-               res.json(data);
-           })
-           .catch((err) => {
-             console.log("Error in fetching all batch details",err);
-             res.json(err);
-           });
-})
-
-// Get All Student details for the batch
-router.get("/api/teacher/student/all/:batchid", (req,res) => {
-  db.studentdetails.find({id:req.params.id})
-    .then((data) => {
-         console.log(data);
-         res.json(data);
-    })
-    .catch((err) => {
-      res.json(err);
-    });
-});
-
-//Search Option:
-router.get("/api/teacher/batch/:searchstr",(req,res) => {
-    db.batchdetails.find({})
-});
-
-// Student routes
-router.get('/api/students/login',function(req,res) {
-   console.log("Inside router",req.body);
-   db.Students
-     .findOne({_id: req.body.stdid})
-     .then(function(studentdet){
-       res.json(studentdet);
-     })
-     .catch(function(err){
-       res.json(err);
-     });
-
 });
 
 module.exports =router;

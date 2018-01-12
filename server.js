@@ -21,7 +21,7 @@ if (process.env.MONGODB_URI) {
       console.log("mongoose connected");
 }
 else {
-      mongoose.connect("mongodb://localhost/gksolutions2");
+      mongoose.connect("mongodb://localhost/gksolutions3");
          console.log(" Server - mongoose connected");
 }
 

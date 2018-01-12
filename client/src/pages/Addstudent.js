@@ -45,7 +45,7 @@ class Addstudent extends Component {
                     studentlname: this.state.studentlname,
                     parentname: this.state.parentname,
                     loginemail: this.state.loginemail,
-                    parentphonenumber:    this.state.parentphonenumber,
+                    parentphonenumber: this.state.parentphonenumber,
                     batchid:
                     this.props.batchdet.bid
                   })
@@ -123,7 +123,3 @@ class Addstudent extends Component {
 } // end class
 
 export default Addstudent;
-/*
-<div> {this.state.bdetails} = {this.props.batchdet}>
-
-</div> */

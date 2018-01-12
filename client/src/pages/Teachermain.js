@@ -15,7 +15,8 @@ class Teachermain extends Component
             canenter : '',
             invalid:'',
             vemail:'',
-            vpword:''
+            vpword:'',
+            logindisp : true
              };
          }
          handleInputChange = (event) => {
@@ -46,7 +47,8 @@ class Teachermain extends Component
                     // window.location = '/teacher/batchmain/';
                      this.setState ({
                           canenter: true,
-                          invalid:false
+                          invalid:false,
+                          logindisp: false
                      })
                    }
                 else {
@@ -58,21 +60,24 @@ class Teachermain extends Component
 
           render()
           {
-                  return(<div>
-                        <form className="fields">
-                                <label id ="lemail">Email Addess</label><br />
-                                <input className="textarea" onChange = {this.handleInputChange} type="text" name="vemail" value={this.state.vemai} /><br />
-                                <label id = "lpsword">Password</label><br />
-                                <input className="textarea" onChange = {this.handleInputChange} type="password" name="vpword" value ={this.state.vpword} /><br />
-                          </form>
-                          <button className ="btn btn-large-info" id = "blogin" onClick={this.logincheck}>Login</button>
-
+                  return( <div>
+                        {this.state.logindisp ?
+                             <div>
+                            <form className="fields">
+                                    <label id ="lemail">Email Addess</label><br />
+                                    <input className="textarea" onChange = {this.handleInputChange} type="text" name="vemail" value={this.state.vemai} /><br />
+                                    <label id = "lpsword">Password</label><br />
+                                    <input className="textarea" onChange = {this.handleInputChange} type="password" name="vpword" value ={this.state.vpword} /><br />
+                              </form>
+                              <button className ="btn btn-large-info" id = "blogin" onClick={this.logincheck}>Login</button>
+                              </div>
+                          : <div></div>}
                               {this.state.canenter ? <Allbatches /> : <div></div>}
                               {this.state.invalid ? <div>
                                                          <h1>Invalid Credentials - Please use right credentials</h1>
                                                       </div>: <div></div>}
 
-                    </div>
+                         </div>
                   ) ; //end return
           } //end render
 

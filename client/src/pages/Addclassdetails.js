@@ -5,8 +5,15 @@ class Addclassdetails extends Component
 {
       render()
       {
-           return(
-             <h1> Student Main Component</h1>
+         let allbatchrecs = this.props.btrecs;
+         return(
+           <select onChange={this.handleInputChange} name="btid" id="btid">
+               {allbatchrecs.map((data,index) =>
+                    <option value={data.recid}>{data.recbatid}</option>
+                  )}
+          </select>
+
+
            )
       }
 }

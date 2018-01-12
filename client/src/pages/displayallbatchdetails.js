@@ -2,6 +2,7 @@ import React,{ Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Listbatch from './Listbatch';
+import Addclassdetails from './Addclassdetails';
 
 class Allbatches extends Component
 {
@@ -33,9 +34,12 @@ class Allbatches extends Component
           }) // end then
           .catch( error => {
             console.log("Error in getting batch records!!!",error);
-          })
+          });
   } // end component did mount
-
+  onClassclick = () => {
+    this.setState({displayclass : true});
+  }
+/*
    deletebatchdetails = (event) => {
      event.preventDefault();
      console.log("Event is",event,": key :",event.key);
@@ -44,18 +48,20 @@ class Allbatches extends Component
  updatebatchdetils = (event) => {
      event.preventDefault();
      console.log("In update batch fields")
- }
+ }*/
     render()
     {
       const stbatchrec = this.state.batchrecords;
       return(<div>
               <h1>All Batches </h1>
               <table>
+              <tbody>
+               <tr>
                 <td>Batch ID</td>
                 <td>Class</td>
                 <td>Level</td>
                 <td>Rate/hour/student</td>
-              <tbody>
+                </tr>
                     {stbatchrec.map((data,index) =>
                       <tr key={index}>
                              <td>{data.recbatid}</td>
@@ -66,33 +72,11 @@ class Allbatches extends Component
                     )}
                </tbody>
               </table>
-              <Link to = '/teacher/batch/classdetails'>Add Class details</Link>
+              <button className ="btn btn-large-info" id = "blogin" onClick={this.onClassclick}>Add Class Details</button>
+              {this.displayclass ? <Addclassdetails b
+                trecs = {this.state.batchrecords}/> :<div></div>}
               <Link to = '/teacher/batchmain'>Create New Batch</Link>
             </div>); // end return
       } // end render
 } //end allbatches
 export default Allbatches;
-
-/*
-
-<th><button className =".deletebatch" name = {data.recid} onClick = {this.deletebatchdetails}>Delete Batch</button></th>
-<th><button className = ".updatebatch" name = {data.recid} onClick = {this.updatebatchdetils}>Update Batch</button></th>
-
-render()
-{
-  const stbatchrec = this.state.batchrecords;
-  return(<div>
-          <h1>All Batches </h1>
-          <table>
-          <tbody>
-                {stbatchrec.map((data,index) =>
-                    {console.log("In map stbatchrec",data);
-                     <Listbatch key={index}
-                                brecords = {data}
-                     />}
-                )}
-           </tbody>
-          </table>
-        </div>); // end return
-  } // end render
-*/
