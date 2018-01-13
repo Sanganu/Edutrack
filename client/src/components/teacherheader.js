@@ -6,7 +6,7 @@ class Teacherheader extends Component {
   {
     return(
         <div className = "jumbotron">
-         <h1>Musical Sensation</h1>
+         <h1>Classical Sensation</h1>
          <h6>For Music Dance Piano</h6>
         </div>
     );

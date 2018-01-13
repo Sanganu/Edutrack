@@ -90,7 +90,7 @@ class Createbatch extends Component {
                     .catch(error => {
                         this.setState({errmsg: error.errstring +" Please check console for further details"},() =>
                          {
-                             console.log("Error in Adding Batch",error.err);   
+                             console.log("Error in Adding Batch",error.err);
                          });
 
                     }); //end new batch creation - axios call
@@ -115,7 +115,7 @@ class Createbatch extends Component {
                                      <label className ="inline">Subject :   </label>
                                      <select  value={this.state.subject} onChange = {this.handleInputChange} name ="subject" id="subject">
                                          <option value ='Music'>Music</option>
-                                         <option value ='Piano'>Piano</option>
+                                         
                                          <option value ='Dance'>Dance</option>
                                      </select><br />
                              </div>

@@ -10,10 +10,10 @@ const path = require("path");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // Serve up static assets
-app.use(express.static("client/build"));
+app.use(express.static(path.join(__dirname,"client/build"));
 // Add routes, both API and view
 app.use(routes);
-// Set up promises with mongoose
+// Set up promises with mjoinongoose
 mongoose.Promise = global.Promise;
 
 if (process.env.MONGODB_URI) {
@@ -21,7 +21,7 @@ if (process.env.MONGODB_URI) {
       console.log("mongoose connected");
 }
 else {
-      mongoose.connect("mongodb://localhost/gksolutions3");
+      mongoose.connect("mongodb://localhost/gksolutions4");
          console.log(" Server - mongoose connected");
 }
 

@@ -1,0 +1,21 @@
+2018-01-13T01:07:03.576291+00:00 app[api]: Release v1 created by user kspmfamily@gmail.com
+2018-01-13T01:07:03.684628+00:00 app[api]: Enable Logplex by user kspmfamily@gmail.com
+2018-01-13T01:07:03.684628+00:00 app[api]: Release v2 created by user kspmfamily@gmail.com
+2018-01-13T01:07:03.576291+00:00 app[api]: Initial release by user kspmfamily@gmail.com
+2018-01-13T01:08:21.521010+00:00 app[api]: Attach MONGODB (@ref:mongolab-concave-54052) by user kspmfamily@gmail.com
+2018-01-13T01:08:21.521010+00:00 app[api]: Release v3 created by user kspmfamily@gmail.com
+2018-01-13T01:12:07.000000+00:00 app[api]: Build started by user kspmfamily@gmail.com
+2018-01-13T01:12:18.941985+00:00 app[api]: Release v4 created by user kspmfamily@gmail.com
+2018-01-13T01:12:18.941985+00:00 app[api]: Deploy 3864dfb4 by user kspmfamily@gmail.com
+2018-01-13T01:12:18.961786+00:00 app[api]: Scaled to web@1:Free by user kspmfamily@gmail.com
+2018-01-13T01:12:07.000000+00:00 app[api]: Build succeeded
+2018-01-13T01:12:24.770452+00:00 app[web.1]: 
+2018-01-13T01:12:24.770466+00:00 app[web.1]: > edutrack@1.0.0 server /app
+2018-01-13T01:12:24.770467+00:00 app[web.1]: > node server.js
+2018-01-13T01:12:24.770468+00:00 app[web.1]: 
+2018-01-13T01:12:25.453138+00:00 app[web.1]: mongoose connected
+2018-01-13T01:12:25.468635+00:00 app[web.1]: 🌎  ==> API Server now listening on PORT 40290!
+2018-01-13T01:12:22.231649+00:00 heroku[web.1]: Starting process with command `npm run server`
+2018-01-13T01:12:26.126988+00:00 heroku[web.1]: State changed from starting to up
+2018-01-13T01:13:09.863795+00:00 heroku[router]: at=info method=GET path="/favicon.ico" host=secret-garden-26062.herokuapp.com request_id=a7144d73-2138-4d00-b46b-852b3f8a6da8 fwd="75.171.213.217" dyno=web.1 connect=1ms service=3ms status=404 bytes=394 protocol=https
+2018-01-13T01:13:09.320182+00:00 heroku[router]: at=info method=GET path="/" host=secret-garden-26062.herokuapp.com request_id=eeca36c4-3908-4352-99f1-dab67d235968 fwd="75.171.213.217" dyno=web.1 connect=1ms service=24ms status=404 bytes=383 protocol=https
