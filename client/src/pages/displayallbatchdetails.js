@@ -72,9 +72,9 @@ class Allbatches extends Component
                     </table>
               </div>
               <div className = "Navbar">
-                    <Link to = '/teacher/batch/addclass' className = 'mainlink'>Add Class details</Link><br />
+
                      <Link to = '/teacher/batchmain' className = 'mainlink'>Create New Batch</Link><br />
-                     <Link to ='/teacher/student' className = 'mainlink'>Search Student Records</Link>
+                  
               </div>
             </div>); // end return
       } // end render

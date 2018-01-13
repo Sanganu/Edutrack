@@ -88,15 +88,17 @@ class Createbatch extends Component {
                         //return <Addstudent />
                     })
                     .catch(error => {
-                        this.setState({errmsg: error.errstring +" Please check console for further details"});
-                        console.log("Error in Adding Batch",error.err);
+                        this.setState({errmsg: error.errstring +" Please check console for further details"},() =>
+                         {
+                             console.log("Error in Adding Batch",error.err);   
+                         });
+
                     }); //end new batch creation - axios call
                   } //end if
         }; // end handleclasscreation
 
       render() {
-        return(
-                  <div>
+        return(<div>
                             <Teacherheader />
                            <h5 className = "subcr">Create New Batch</h5>
                            <p className="errmsg">{this.state.errmsg}</p>

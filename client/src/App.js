@@ -25,6 +25,7 @@ const App = () =>
                    <Route exact path="/teacher/batchmain" component={Batchmain} />
                    <Route exact path="/teacher/createbatch" component={Createbatch} />
                    <Route exact path ="/teacher/batch/addstudent/:batchid" component={Addstudent} />
+                   <Route exact path ="/teacher/batch/aclass" component={Addclass} />
                    <Route exact path ="/teacher/batch/addclass" component={Addclass} />
                    <Redirect to = "/" />
             </Switch>

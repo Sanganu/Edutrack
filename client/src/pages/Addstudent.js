@@ -93,7 +93,7 @@ class Addstudent extends Component {
                             <p>Rate: {bdetails.rateperhour}$</p>
                         </div>
                      </div>
-                    
+
                     <h5 className = "subhead">Add Students to the Batch</h5>
                     <br />
                     <form>
@@ -136,7 +136,7 @@ class Addstudent extends Component {
                         </div>
                     </form>
                      <br />
-                      <h6 className ="tablehead">Stuent Details </h6>
+                      <h6 className ="tablehead">Student Details </h6>
                       <div className = "table-responsive">
                             <table className = "table table-hover">
                             <tbody>

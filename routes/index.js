@@ -116,6 +116,7 @@ router.get("/api/teacher/batch/all",(req,res) => {
 // Add class details -Get All Student details for the batch for class entry
 router.get("/api/teacher/batch/:batchid", (req,res) => {
   console.log("In router",req.params.batchid);
+  //var bid = mongoose.Types.ObjectId.fromString(batchid);
   db.batchdetails.findOne({_id:req.params.batchid})
      .populate('students')
       .then((data) => {
@@ -127,7 +128,7 @@ router.get("/api/teacher/batch/:batchid", (req,res) => {
         res.json(err);
       });
 });
-/*
+
 // Add class details -Get All Student details for the batch for class entry
 router.get("/api/teacher/student/all/:batchid", (req,res) => {
   console.log("In router");
@@ -141,7 +142,7 @@ router.get("/api/teacher/student/all/:batchid", (req,res) => {
         console.log("Error is fetching records",err);
         res.json(err);
       });
-}); */
+});
 
 //Search Option:
 router.get("/api/teacher/batch/:searchstr",(req,res) => {
@@ -169,7 +170,7 @@ router.post('/api/others/student/login',function(req,res) {
 
 });
 
-////Add Class detaisl And Update Batches table
+////Add Class details And Update Batches table
 router.post('/api/teacher/batch/class/new',function(req,res) {
         console.log("Insiderouter to add new student",req.body);
       var newrecord = req.body;

@@ -77,3 +77,8 @@ body {
 .footer a{
   color: white
 }
+
+.vcontent {
+  align-self: center;
+  padding-left: 40px;
+}
