@@ -8,19 +8,28 @@ Please use
 email: 'myemail@yahoo.com'
 password: welcome
 
-Student's Login:
-Email: snajana@gmail.com
-First name: sana
-LastName: krithik
-phonenumber: 303-444-555s
-
-Username: skrithik
-Password:303sana
+The  teacher can create a batch and add students to the batch. The Credentials used at the time of student creation - determines the student login credetials:
 
 Username: <Firstletter of firstname><all characters of lastname>
 Password: <first 3 character of phone number and full firstname>
 
 Email, Username and password are Case-sensitive
+
+
+Student's Login:
+
+Example:
+
+The Student details entered:
+Email: sanjana@gmail.com
+First name: sana
+LastName: krithik
+phonenumber: 303-444-555s
+
+Login Credentials:
+Username: skrithik
+Password:303sana
+email: sanjana@gmail.com
 
 
 The Application is designed for Independant Tutors
