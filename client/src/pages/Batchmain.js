@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+ import React, { Component } from 'react';
 import Createbatch from './Createbatch';
 import Addstudent from './Addstudent';
 
@@ -18,7 +18,6 @@ class Batchmain extends Component {
 
         this.setState({
             batchdet : batchdet,
-
           },
             () => {
               this.setState({  displaybatch:false})
@@ -30,16 +29,12 @@ class Batchmain extends Component {
       render() {
 
         const  brecords =this.state.batchdet;
-        return(
-           <div>
+        return(<div>
                {this.state.displaybatch ? <Createbatch
                                          onInsert={this.handleBatchCreated} />
                          : <Addstudent batchdet = {brecords}
                                        onchange = {this.handleStudentAdded} />}
-
-
-           </div>
-        ) // end return
+              </div>) // end return
       }// end render
 
 } // end class Batchmain

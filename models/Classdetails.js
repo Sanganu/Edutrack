@@ -14,11 +14,17 @@ const classdetailsSchema = new Schema({
           type: Schema.Types.ObjectId,
           ref: 'batchdetails'
         },
-       createdDate: {
-          type:Date,
-          default: Date.now
+       students: [{
+            type : Schema.Types.ObjectId,
+            ref: 'studentdetails'
+        }],
+        classdate :{
+          type: Date,
         },
-
+        createdDate: {
+           type:Date,
+           default: Date.now
+         }
 });
 
 

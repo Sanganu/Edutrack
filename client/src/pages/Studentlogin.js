@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+//import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Studentmain from './Studentmain';
 import Teacherheader from '../components/Teacherheader';
-
+import Footer from '../components/Footer';
 
 class Studentlogin extends Component
 {
@@ -11,13 +11,12 @@ class Studentlogin extends Component
                  {
                    super(props);
                    this.state = {
-                          canenter : '',
-                          invalid:false,
                           vemail:'',
                           vpword:'',
                           vuname: '',
                           showstlogin: true,
-                          studentrecord:{}
+                          studentrecord:{},
+                          classdet:[]
                      };
 
                  } //end constructor
@@ -25,7 +24,7 @@ class Studentlogin extends Component
                        const target = event.target;
                        const value = target.value;
                        const name  = target.name;
-                       console.log('The Value in input change',value,name);
+                       //console.log('The Value in input c hange',value,name);
 
                        this.setState({
                           [name]: value
@@ -44,7 +43,8 @@ class Studentlogin extends Component
                            this.state.vuname === "")
                            {
                               console.log('Enter Valid Credentials in all fields');
-                              this.setState({invalid:true});
+                              this.setState({invalid:true,
+                                              errmsg: "Blank fields .. Enter valid credentials"});
 
                            }
                         else {
@@ -55,33 +55,33 @@ class Studentlogin extends Component
                                     suname : this.state.vuname,
                                     spword: this.state.vpword
                                   })
-                                  .then( response =>
-                                   {
-                                     if(response.data !== null)
-                                     {
-                                       console.log("The response from student login valid",response);
-                                       this.setState({canenter : true,
-                                                      invalid : false,
-                                                      showstlogin:false,
-                                                      studentrecord:response.data},
-                                                      () => {
-                                                        console.log("State updates",this.state.studentrecord);
-                                                      });
-                                     }
-                                     else {
-                                       this.setState({errmsg: " Invalid Credentials .. Enter valid credentials"});
-                                       console.log("Student Login details- invalid ");
-                                       this.setState({canenter : false,
-                                                      invalid: true});
-                                     }
-
-
+                                  .then( (response) =>{
+                                         console.log("The response from axios",response);
+                                         console.log("The classes details", response.data.classes);
+                                         if ( response.data.studentrecord)
+                                         {
+                                         this.setState({    showstlogin:false,
+                                                            studentrecord:(response.data.studentrecord),
+                                                            classdet:(response.data.classes)},
+                                                            () => {
+                                                              console.log("State updates",this.state.studentrecord);
+                                                            });
+                                          }
+                                          else {
+                                            console.log("Error in validating student login - student login does not exist",);
+                                            this.setState({
+                                                           errmsg: "Invaild Student login exist .. Enter valid credentials or Contact your Teacher",
+                                                           showstlogin: true
+                                                           });
+                                          }
                                    })
-                                   .catch(error => {
-                                       this.setState({errmsg: error.errstring +" Invalid Credentials .. Enter valid credentials"});
-                                       console.log("Error in validating student login ",error.err);
-                                       this.setState({canenter : false,
-                                                      invalid: true});
+                                   .catch((error) => {
+
+                                       console.log("Error in validating student login ",error);
+                                       this.setState({
+                                                      errmsg: "Invaild Student login exist .. Enter valid credentials or Contact your Teacher",
+                                                      showstlogin: true
+                                                      });
                                    });
                           } //end else
 
@@ -91,36 +91,36 @@ class Studentlogin extends Component
                   render()
                   {
                           return(<div>
-                                 <Teacherheader/>
-                                 {this.state.invalid ? <div>
-                                                      <h5 className ="errmsg">Invalid Credentials - Please use right credentials</h5>
-                                                     </div>: <div></div>}
-                                 {this.state.showstlogin ?
-                                   <div>
-                                            <h3>Student Login </h3>
-                                            <form className="form-inline">
-                                                <div className = "form-group">
-                                                    <label id ="lemail">Email Addess</label><br />
-                                                    <input className="textarea" onChange = {this.handleInputChange} type="text" name="vemail" value={this.state.vemai} /><br />
-                                                </div>
-                                                <div className = "form-group">
-                                                    <label id ="lemail">User Name</label><br />
-                                                    <input className="textarea" onChange = {this.handleInputChange} type="text" name="vuname" value={this.state.vuname} /><br />
-                                                </div>
-                                                 <div className = "form-group">
-                                                    <label id = "lpsword">Password</label><br />
-                                                    <input className="textarea" onChange = {this.handleInputChange} type="password" name="vpword" value ={this.state.vpword} /><br />
-                                                 </div>
-                                                 <br />
-                                                   <button className ="btn btn-large-info" id = "blogin" onClick={this.logincheck}>Login</button>
-                                              </form>
-
-                                   </div>
-                                  :  <div></div> }
-                                  {this.state.canenter ? <Studentmain studentdet = {this.state.studentrecord}/> : <div></div>}
-
-                              </div>
-                           ) ; //end return
+                                       <Teacherheader/>
+                                       {this.state.showstlogin ?
+                                         <div className = "tloginsection container">
+                                            <div>
+                                                  <h3>Student Login </h3>
+                                                  <div>
+                                                       <h5 className ="errmsg">{this.state.errmsg}</h5>
+                                                        <form className="inputsection">
+                                                            <div className = "form-group">
+                                                                <label id ="lemail">Email Addess</label><br />
+                                                                <input className="textarea" onChange = {this.handleInputChange} type="text" name="vemail" value={this.state.vemail} /><br />
+                                                            </div>
+                                                            <div className = "form-group">
+                                                                <label id ="lemail">User Name</label><br />
+                                                                <input className="textarea" onChange = {this.handleInputChange} type="text" name="vuname" value={this.state.vuname} /><br />
+                                                            </div>
+                                                             <div className = "form-group">
+                                                                <label id = "lpsword">Password</label><br />
+                                                                <input className="textarea" onChange = {this.handleInputChange} type="password" name="vpword" value ={this.state.vpword} /><br />
+                                                             </div>
+                                                             <br />
+                                                               <button className ="btn btn-lg-info" id = "blogin" onClick={this.logincheck}>Login</button>
+                                                         </form>
+                                                   </div>
+                                              </div>
+                                         </div>
+                                        :  <div><Studentmain studentdet = {this.state.studentrecord}
+                                                        classrecords = {this.state.classdet} /></div>}
+                                      <Footer />
+                              </div>) //end return
                   } //end render
 
 } //end class Student Main

@@ -3,11 +3,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const batchdetailsSchema = new Schema({
-        batchid:{
-          type:Number,
-          unquie:true,
-          required:true
-        },
         batchdesc: {
            type: String,
          },
@@ -26,10 +21,10 @@ const batchdetailsSchema = new Schema({
           type: Schema.Types.ObjectId,
           ref: 'studentdetails'
         }],
-        classid :{
+        classid :[{
           type:Schema.Types.ObjectId,
           ref:'classdetails'
-        },
+        }],
        createdDate: {
           type:Date,
           default: Date.now

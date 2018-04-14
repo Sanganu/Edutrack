@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-//import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import ReactDOM from 'react-dom';
 import Allbatches from './displayallbatchdetails';
-import Batchmain from './Batchmain';
-import Createbatch from './Createbatch';
-import Visitors from './Visitors';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 class Teachermain extends Component
 {
@@ -20,24 +16,21 @@ class Teachermain extends Component
             logindisp : true
              };
          }
+
          handleInputChange = (event) => {
                const target = event.target;
                const value = target.value;
                const name  = target.name;
-               console.log('The Value in input change',value,name);
+               //console.log('The Value in input change',value,name);
 
                this.setState({
                   [name]: value
-                } /*,
-                () =>{
-                  console.log('Set State in Main Section',value,name);
-                } */);
+                });
          };
 
 
          logincheck = (event) => {
                event.preventDefault();
-               console.log("Teacher's login plan is to implement OAuth, but feature deferred due to lack of time");
                console.log("Use myemail@yahoo.com and welcome to enter site ");
                console.log(this.state.vemail, this.state.vpword);
 
@@ -61,29 +54,42 @@ class Teachermain extends Component
 
           render()
           {
-                  return( <div>
+                  return( <div >
 
-                        {this.state.logindisp ?
+                         {this.state.logindisp ?
                              <div>
-                             <Header />
-                            <form className="fields">
-                                 <div className = "form-group">
-                                    <label id ="lemail">Email Addess</label><br />
-                                    <input className="textarea" onChange = {this.handleInputChange} type="text" name="vemail" value={this.state.vemai} /><br />
-                                </div>
-                                <div className = "form-group">
-                                    <label id = "lpsword">Password</label><br />
-                                    <input className="textarea" onChange = {this.handleInputChange} type="password" name="vpword" value ={this.state.vpword} /><br />
-                                </div>
-                              </form> <br />
-                              <button className ="btn btn-lg btn-info" id = "blogin" onClick={this.logincheck}>Login</button>
-                              </div>
+                                         <Header />
+                                         <div className = "tloginsection container">
+                                             <div className = "row">
+                                                  <div className = "col-sm-6">
+                                                      <form className="inputsection">
+                                                                    <h3 id="tlogin">Teacher Login</h3>
+                                                                     <div className = "form-group row">
+                                                                          <label forhtml = "vemail" id ="lemail">Email Addess  </label><br />
+                                                                          <input className="textarea" onChange  = {this.handleInputChange} type="text" name="vemail" id="vemail" value={this.state.vemai} /><br />
+                                                                      </div>
+                                                                      <div className = "form-group row">
+                                                                          <label forhtml = "vpword" id = "lpsword">Password  </label><br />
+                                                                          <input className="textarea" onChange = {this.handleInputChange} type="password" name="vpword" id ="vpword" value ={this.state.vpword} /><br />
+                                                                      </div>
+                                                                     <br />
+                                                                       <p>Hint: (email:myemail@yahoo.com  password:welcome)</p>
+                                                                       <button className ="btn btn-lg btn-info" id = "blogin" onClick={this.logincheck}>Login</button>
+                                                       </form>
+                                                    </div>
+                                                    <div className = "col-sm-6">
+                                                          <img id = "timg" src = {require("./teacherquote.jpg")} alt="teachers teach from heart"  className="img-responsive" />
+                                                    </div>
+                                               </div>
+                                          </div>
+                                  </div>
                           : <div></div>}
                               {this.state.canenter ? <Allbatches /> : <div></div>}
                               {this.state.invalid ? <div>
                                                          <h6 className ="errmsg">Invalid Credentials - Please use right credentials</h6>
                                                       </div>: <div></div>}
 
+                          <Footer />
                          </div>
                   ) ; //end return
           } //end render
@@ -91,51 +97,3 @@ class Teachermain extends Component
 } //end class Teacher Main
 
 export default Teachermain;
-
-/*
-<label className ="inline">
-    <input type = "text"   value={this.state.teacherid} onChange = {this.handleInputchange} name = "teacherid" />User Id
- </label>
- <label className ="inline">
-     <input type = "text"  value={this.state.teacherpassword} onChange = {this.handleInputchange} name = "teacherpassword" />Password
-  </label>
-  <button className = "btn btn-info"  name = "getquest" onClick = {this.handleteacherlogin}>Login</button>
-</form>
-</form>
-<h2>Students Login</h2>
- <h5>Please use your signin credentials assigned to you</h5>
-<form>
-     <label className ="">
-        <input value={this.state.studentid}
-               onChange={this.handleInputChange}
-               name="studentid"
-               placeholder="Enter your Student ID"
-               type = "text"
-         />
-
-      </label>      <label className ="">
-         Enter your password
-         <input value={this.state.studentpassword}
-                onChange={this.handleInputChange}
-                name="studentpwd"
-                placeholder="Enter your PIN"
-          />
-
-       </label>
-       <button className="btn btn-info" name="stlogin"  onClick = {this.handlestudentLogin}>Login</button>
-
-
-
-          nextcomp = (event) =>
-          {
-                const itlink = event.target.name;
-                if ( itlink === "batchmain")
-                {
-                  console.log("batchmain");
-                    return <Batchmain />
-                }
-                else if( itlink === "search")
-                {
-                  console.log("search")
-                }
-          } */

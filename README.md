@@ -1,4 +1,4 @@
-# Edutrack
+https://github.com/whatisbyandby/mongo_web_scraper.git# Edutrack
 
 https://secret-garden-26062.herokuapp.com/
 
@@ -47,3 +47,6 @@ Student's can eventually login to the application.
 Created using React, MongoDB, Mongoose, Axios, Bootstrap
 
 Please click and wait for couple of mins as it might take time for heroku to respond
+
+Future developments:
+- To create teacher's Account using OAuth for Google Accounts, this will further help in using Google Calendar API.

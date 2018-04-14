@@ -5,9 +5,9 @@ class Teacherheader extends Component {
   render()
   {
     return(
-        <div className = "navbar navbar-default">
-         <h1>Academy of Music & Dance</h1>
-         <h6>Music & Dance are all you need</h6>
+        <div className = "footer">
+         <h1>&#169; Sangeetha</h1>
+         <Link>Return to Edutrack</Link>
         </div>
     );
   }

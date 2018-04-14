@@ -1,49 +1,36 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+ import React, { Component } from 'react';
+ import Allclasses from './displayallclassdetails';
 
 class Studentmain extends Component
 {
-  state = {
-    stfname:'',
-    stlname: '',
-    stbatchid:'',
-    stid:''
-  }
-    componentWillReceiveProps = () => {
-      let stdid = this.props.data._id;
-     /*
-      axios.get('/api/others/student/class')
-            .then(response =>
-              {
-                 console.log("The Response",response);
-                 this.setState({
-
-                 });
-              })
-            .catch( error => {
-              console.log("Error in getting student class records!!!",error);
-            }); */
+    state = {
+      stfname:'',
+      stlname: '',
+      stbatchid:'',
+      stid:''
     }
+    componentWillReceiveProps = () => {
+          console.log("props received",this.props);
+     }
 
       render()
       {
            return(<div>
 
-                     <h4 className = "subhead">Welcome {this.props.studentdet.studentfname}    {this.props.studentdet.studentlname} </h4>
+                     <h4 className = "subhead">Welcome {this.props.studentdet.fname}    {this.props.studentdet.lname} </h4>
                      <br />
-                     <div className = "row">
-                     <div className = "col-md-6">
-                         <p>Parent:{this.props.studentdet.parentname} </p>
-                         <p>Phone number:{this.props.studentdet.parentphonenumber}</p>
-                         <p>Email: {this.props.studentdet.loginemail}</p>
-                     </div>
-                     <div className = "col-md-6">
-                           <p>Batch ID: {this.props.studentdet.batchid.batchid}</p>
-                           <p>Batch Description{this.props.studentdet.batchid.batchdesc}</p>
-                           <p>level: {this.props.studentdet.batchid.level}</p>
-                           <p>Rate:{this.props.studentdet.batchid.rateperhour}</p>
-                      </div>
-                      </div>
+                           <div>
+                                 <p>Parent: {this.props.studentdet.parent}</p>
+                                 <p>Username:{this.props.studentdet.uname} </p>
+                                 <p>Phone number:{this.props.studentdet.phone}</p>
+                                 <p>Subject: {this.props.studentdet.subject}</p>
+                                 <p>Email: {this.props.studentdet.email}</p>
+                                 <p>Level: {this.props.studentdet.level}</p>
+                                 <p>Rate: {this.props.studentdet.rate}</p>
+                                  <p>Batch Description: {this.props.studentdet.batch}</p>
+
+                             </div>
+                             <Allclasses classrecords = {this.props.classrecords}/>
                  </div>)
       }
 }

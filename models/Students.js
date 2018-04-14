@@ -30,24 +30,14 @@ const studentSchema = new Schema({
             passw: {
               type: String
             },
-          addedon : {
+          createdDate : {
             type: Date,
             default: Date.now
           },
           batchid : {
             type: Schema.Types.ObjectId,
             ref: 'batchdetails'
-          },
-          attendace:[{
-            classid :{
-              type:Schema.Types.ObjectId,
-              ref:'classdetails'
-            },
-            present: {
-              type: Boolean
-            }
-          }]
-
+          }
 });
 const studentdetails = mongoose.model("studentdetails", studentSchema);
 module.exports = studentdetails;

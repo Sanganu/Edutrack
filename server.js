@@ -13,16 +13,19 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname,"client/build")));
 // Add routes, both API and view
 app.use(routes);
-// Set up promises with mjoinongoose
-mongoose.Promise = global.Promise;
+// Set up promises
+mongoose.Promise = Promise;
 
-if (process.env.MONGODB_URI) {
-      mongoose.connect(process.env.MONGODB_URI);
-      console.log("mongoose connected");
+if(process.env.MONGODB_URI) {
+      mongoose.connect(process.env.MONGODB_URI, {
+        useMongoClient: true
+      });
 }
 else {
-      mongoose.connect("mongodb://localhost/gksolutions4");
-         console.log(" Server - mongoose connected");
+      mongoose.connect("mongodb://localhost/gkedutrack1", {
+        useMongoClient: true
+      });
+      console.log("mongoose connected")
 }
 
 
