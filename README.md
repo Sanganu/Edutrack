@@ -1,4 +1,4 @@
-https://github.com/whatisbyandby/mongo_web_scraper.git# Edutrack
+Edutrack
 
 https://secret-garden-26062.herokuapp.com/
 
